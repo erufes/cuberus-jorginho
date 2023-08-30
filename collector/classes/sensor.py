@@ -30,9 +30,9 @@ class Sensor():
 
         
     # Set
-    def set_TimerLeituraCentro(self, time):
+    def set_TimerLeituraCentro(self, time=0):
         self.timer_leitura_centro = time
-    def set_TimerLeituraAresta(self, time):
+    def set_TimerLeituraAresta(self, time=0):
         self.timer_leitura_aresta = time
         
     def set_movimenta(self):

@@ -16,10 +16,10 @@ class Base():
         self.ev3.speaker.beep()
         
     # Set
-    def set_qtdMovimentos(self, qtd):
+    def set_qtdMovimentos(self, qtd=1):
         self.qtd = qtd
         
-    def set_Direcao(self, direcao):
+    def set_Direcao(self, direcao='d'):
         self.direcao = direcao
         
     def set_movimenta(self):

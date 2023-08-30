@@ -17,7 +17,7 @@ class Braco():
         self.motor.run_angle(1000, -100, Stop.HOLD, True)
         
     # Set
-    def set_sentido(self, sentido):
+    def set_sentido(self, sentido=1):
         self.sentido = sentido
         
     def set_movimenta(self):
