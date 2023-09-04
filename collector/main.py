@@ -52,7 +52,7 @@ braco =  Braco(Motor(Port.A, Direction.CLOCKWISE, None))
 
 # Movimento Base
 base =  Base(Motor(Port.B, Direction.CLOCKWISE, None), ev3)
-    
+
 # Movimento sensor
 sensor =  Sensor(Motor(Port.C, Direction.CLOCKWISE, None))
 

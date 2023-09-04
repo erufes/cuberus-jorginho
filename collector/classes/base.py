@@ -8,12 +8,10 @@ class Base():
         
     # Funções da clase
     def _movEsquerda(self):
-        self.motor.run_angle(500, -270 * self.qtd, Stop.HOLD, True)
-        self.ev3.speaker.beep()
+        self.motor.run_angle(1000, -270 * self.qtd, Stop.HOLD, True)
 
     def _movDireita(self):
-        self.motor.run_angle(500, 270 * self.qtd, Stop.HOLD, True)
-        self.ev3.speaker.beep()
+        self.motor.run_angle(1000, 270 * self.qtd, Stop.HOLD, True)
         
     # Set
     def set_qtdMovimentos(self, qtd=1):

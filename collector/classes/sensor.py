@@ -10,15 +10,15 @@ class Sensor():
     # Funções da clase
     def _movCentro(self):
         self._movOrigem()
-        self.motor.run_angle(500, 360, Stop.HOLD, True)
+        self.motor.run_angle(1000, 360, Stop.HOLD, True)
         self.angle = 360
         
     def _movOrigem(self):
         
         if(self.angle == 65):
-            self.motor.run_angle(500, -65, Stop.HOLD, True)
+            self.motor.run_angle(1000, -65, Stop.HOLD, True)
         elif(self.angle == 360):
-            self.motor.run_angle(500, -360, Stop.HOLD, True)
+            self.motor.run_angle(1000, -360, Stop.HOLD, True)
         self.angle = 0  
 
         
