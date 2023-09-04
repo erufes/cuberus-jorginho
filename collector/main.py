@@ -10,28 +10,52 @@ from classes.sensor import Sensor
 # Create your objects here.
 ev3 = EV3Brick()
 
-# # Movimento braço
-# # braco =  Braco(Motor(Port.A, Direction.CLOCKWISE, None))
-# # braco.set_sentido(1)
-#
-# # ev3.speaker.beep()
-#
-# # braco.set_movimenta()
 
-# # Movimento Base
-# # base =  Base(Motor(Port.A, Direction.CLOCKWISE, None), ev3)
-# # base.set_qtdMovimentos(4)
-# # base.set_Direcao('d')
-#
-# # base.set_movimenta()
-#     
-# # ev3.speaker.beep()
+# Leitura cubo completo
 
-# # Movimento sensor
-# # sensor =  Sensor(Motor(Port.A, Direction.CLOCKWISE, None))
-# # sensor.set_TimerLeituraCentro(2)
-# # sensor.set_TimerLeituraAresta(16)
-#
-# # sensor.set_movimenta()
-#
-# # ev3.speaker.beep()
+def scam_cubo(braco, base, sensor, sentido_braco, sentido_base, qtd_base, time_leitura):
+    # Setting
+    braco.set_sentido(sentido_braco)
+    
+    base.set_qtdMovimentos(qtd_base)
+    base.set_Direcao(sentido_base)
+    
+    sensor.set_TimerLeituraCentro(time_leitura)
+    
+    # Face 1
+    sensor.set_movimenta()
+    
+    # Face 2
+    braco.set_movimenta()
+    sensor.set_movimenta()
+    
+    # Face 3
+    braco.set_movimenta()
+    sensor.set_movimenta()
+    
+    # Face 4
+    braco.set_movimenta()
+    sensor.set_movimenta()
+    
+    # Face 5
+    base.set_movimenta()
+    braco.set_movimenta()
+    sensor.set_movimenta()
+    
+    # Face 6
+    braco.set_movimenta()
+    braco.set_movimenta()
+    sensor.set_movimenta()
+
+# Movimento braço
+braco =  Braco(Motor(Port.A, Direction.CLOCKWISE, None))
+
+# Movimento Base
+base =  Base(Motor(Port.B, Direction.CLOCKWISE, None), ev3)
+    
+# Movimento sensor
+sensor =  Sensor(Motor(Port.C, Direction.CLOCKWISE, None))
+
+scam_cubo(braco, base, sensor, 1, 'd', 1, 2)
+
+ev3.speaker.beep()
