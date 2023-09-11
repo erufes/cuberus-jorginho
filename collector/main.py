@@ -1,37 +1,39 @@
 #!/usr/bin/env pybricks-micropython
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import Motor
-from pybricks.parameters import Port, Direction
+from pybricks.parameters import Port, Stop, Direction, Button, Color
+from ev3dev2.sensor import Sensor, INPUT_1
+from ev3dev2.port import LegoPort
 
 from classes.braco  import Braco
 from classes.base   import Base
-from classes.sensor import Sensor
 
-# Create your objects here.
+from pybricks.iodevices import I2CDevice
+from pybricks.iodevices import  AnalogSensor
+from pybricks.iodevices import UARTDevice
+from pybricks.tools import wait, StopWatch, DataLog
+from pybricks.media.ev3dev import Font
+
+import os
+import sys
+import time
+
+from nxtcam.i2c import *
+from nxtcam.mindsensorsPYB import NXTCAM
+
+
 ev3 = EV3Brick()
+# Set LEGO port for Pixy on input port 1
+in1 = LegoPort(INPUT_1)
+in1.mode = 'auto'
+# Wait 2 secs for the port to get ready
 
-# # Movimento braço
-# # braco =  Braco(Motor(Port.A, Direction.CLOCKWISE, None))
-# # braco.set_sentido(1)
-#
-# # ev3.speaker.beep()
-#
-# # braco.set_movimenta()
+time.sleep(2)
 
-# # Movimento Base
-# # base =  Base(Motor(Port.A, Direction.CLOCKWISE, None), ev3)
-# # base.set_qtdMovimentos(4)
-# # base.set_Direcao('d')
-#
-# # base.set_movimenta()
-#     
-# # ev3.speaker.beep()
+# Connect Pixy camera
+pixy = Sensor(INPUT_1)
 
-# # Movimento sensor
-# # sensor =  Sensor(Motor(Port.A, Direction.CLOCKWISE, None))
-# # sensor.set_TimerLeituraCentro(2)
-# # sensor.set_TimerLeituraAresta(16)
-#
-# # sensor.set_movimenta()
-#
-# # ev3.speaker.beep()
+cam = NXTCAM(pixy)
+ev3.speaker.beep()
+
+
