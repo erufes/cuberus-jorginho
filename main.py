@@ -21,19 +21,32 @@ import time
 from nxtcam.i2c import *
 from nxtcam.mindsensorsPYB import NXTCAM
 
-
+NXTCAM_ADDRESS = 0x02
 ev3 = EV3Brick()
+ev3.speaker.beep()
 # Set LEGO port for Pixy on input port 1
-in1 = LegoPort(INPUT_1)
-in1.mode = 'auto'
+#in1 = LegoPort(INPUT_1)
+#in1.mode = 'auto'
 # Wait 2 secs for the port to get ready
 
 time.sleep(2)
 
 # Connect Pixy camera
-pixy = Sensor(INPUT_1)
+#pixy = Sensor(INPUT_1)
 
-cam = NXTCAM(pixy)
-ev3.speaker.beep()
+#initialize nxtcam
+cam = NXTCAM(Port.S1,NXTCAM_ADDRESS)
+
+cam.startTracking()
+cam.trackObject()
+
+b = cam.getBlobs(1)
+print("Color: " + str(b.color))
+print("Left: " + str(b.left))
+print("Top: " + str(b.top))
+print("Right: " + str(b.right))
+print("Bottom: " + str(b.bottom))
+
+
 
 
