@@ -1,0 +1,32 @@
+{
+    "Branco": [
+      ["Branco", "Branco", "Branco"],
+      ["Branco", "Branco", "Branco"],
+      ["Branco", "Branco", "Branco"]
+    ],
+    "Vermelho": [
+      ["Vermelho", "Vermelho", "Vermelho"],
+      ["Vermelho", "Vermelho", "Vermelho"],
+      ["Vermelho", "Vermelho", "Vermelho"]
+    ],
+    "Azul": [
+      ["Azul", "Azul", "Azul"],
+      ["Azul", "Azul", "Azul"],
+      ["Azul", "Azul", "Azul"]
+    ],
+    "Verde": [
+      ["Verde", "Verde", "Verde"],
+      ["Verde", "Verde", "Verde"],
+      ["Verde", "Verde", "Verde"]
+    ], 
+    "Amarelo": [
+      ["Amarelo", "Amarelo", "Amarelo"],
+      ["Amarelo", "Amarelo", "Amarelo"],
+      ["Amarelo", "Amarelo", "Amarelo"]
+    ], 
+    "Laranja": [
+      ["Laranja", "Laranja", "Laranja"],
+      ["Laranja", "Laranja", "Laranja"],
+      ["Laranja", "Laranja", "Laranja"]
+    ]
+  }
