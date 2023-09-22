@@ -1,18 +1,28 @@
 from pybricks.parameters import Stop
 
 class Base():
+    
     # Construtor
     def __init__(self, motor, ev3):
         self.motor = motor
         self.ev3 = ev3
+        self.qtd = 1
         
     # Funções da clase
+    def ajeitadinha(self):
+        self.motor.run_angle(2000, 15 * self.qtd, Stop.HOLD, True)
+        self.motor.run_angle(2000, -15 * self.qtd, Stop.HOLD, True)
+        self.motor.run_angle(2000, 15 * self.qtd, Stop.HOLD, True)
+        self.motor.run_angle(2000, -15 * self.qtd, Stop.HOLD, True)
+        self.motor.run_angle(2000, 15 * self.qtd, Stop.HOLD, True)
+        self.motor.run_angle(2000, -15 * self.qtd, Stop.HOLD, True)
+        
     def _movEsquerda(self):
-        self.motor.run_angle(500, -270 * self.qtd, Stop.HOLD, True)
+        self.motor.run_angle(1000, -270 * self.qtd, Stop.HOLD, True)
         self.ev3.speaker.beep()
 
     def _movDireita(self):
-        self.motor.run_angle(500, 270 * self.qtd, Stop.HOLD, True)
+        self.motor.run_angle(2000, 270 * self.qtd, Stop.HOLD, True)
         self.ev3.speaker.beep()
         
     # Set

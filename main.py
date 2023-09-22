@@ -3,56 +3,99 @@ from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import Motor
 from pybricks.parameters import Port, Direction
 
-from classes.movimento import Movimento
+#from classes.movimento import Movimento
 from classes.braco  import Braco
 from classes.base   import Base
 from classes.sensor import Sensor
 import json
+import time
 
-arquivo = 'algoritmoDeSolucao/cubos/movimentos_cuboConfigEx1.json'
+#arquivo = 'algoritmoDeSolucao/cubos/movimentos_cuboConfigEx1.json'
 # Create your objects here.
 
 ev3 = EV3Brick()
 
 # Inicializa as partes do jorginho
 
-braco =  Braco(Motor(Port.A, Direction.CLOCKWISE, None))
-base_hor =  Base(Motor(Port.A, Direction.CLOCKWISE, None), ev3)
-base_antihor = Base(Motor(Port.A, Direction.COUNTERCLOCKWISE, None), ev3)
-sensor =  Sensor(Motor(Port.A, Direction.CLOCKWISE, None))
-
+braco =  Braco(Motor(Port.A, Direction.COUNTERCLOCKWISE, None))
+base =  Base(Motor(Port.B, Direction.CLOCKWISE, None), ev3)
+#sensor =  Sensor(Motor(Port.C, Direction.CLOCKWISE, None))
 def movimenta_esquerda(sentido):
     if sentido == 'horario':
+        base._movEsquerda()
+        braco.set_movimenta()
+        braco._segurarCubo()
+        #time.sleep(1)
+        braco._segurarCubo()
+        base._movEsquerda()
+        braco._voltarPosicaoOriginal()
+        braco._voltarPosicaoOriginal()
+        base.ajeitadinha()
+        time.sleep(1)
+        # braco.set_movimenta()
+        # base.ajeitadinha()
+        # braco.set_movimenta()
+        # base.ajeitadinha()
+        # base._movEsquerda()
+        # braco._girarCubo()
+        # braco._voltarPosicaoOriginal()
+        # base._movDireita()
+        
 
-    else:
 
 def movimenta_direita(sentido):
-    if sentido == 'horario':
+     if sentido == 'horario':
+        braco._segurarCubo()
+        braco._girarCubo()
+        braco._voltarPosicaoOriginal()
+        base._movDireita()
+        braco._segurarCubo()
+        braco._girarCubo()
+        time.sleep(1)
+        braco._segurarCubo()
+        base._movEsquerda()
+        braco._girarCubo()
+        braco._voltarPosicaoOriginal()
+        base._movEsquerda()
 
-    else:
 
-def movimenta_baixo(sentido):
-    if sentido == 'horario':
+# def movimenta_baixo(sentido):
+#     if sentido == 'horario':
 
-    else:
+#     else:
 
+<<<<<<< Updated upstream:main.py
 def movimenta_cima(sentido):
     if sentido == 'horario':
 
     else:
+=======
+# def movimenta_cima(sentido):
+#     if sentido == 'horario':
+#         braco._segurarCubo()
+#         braco._girarCubo()
+        
+#     else:
+>>>>>>> Stashed changes:collector/main.py
 
-def movimenta_frente(sentido):
+# def movimenta_frente(sentido):
+#     if sentido == 'horario':
+
+#     else:
+
+def roda_eixoX(sentido):
+    
     if sentido == 'horario':
-
-    else:
-
- def roda_eixoX(sentido):
-     
-    if sentido == 'horario':
-        base_hor._movEsquerda()
-        base_hor._movEsquerda()
+        base._movDireita()
+        base._movDireita()
         braco._segurarCubo()
         braco._girarCubo()
+<<<<<<< Updated upstream:main.py
+=======
+        braco._voltarPosicaoOriginal()
+        base._movDireita()
+        base._movDireita()
+>>>>>>> Stashed changes:collector/main.py
         
     else:
         braco._segurarCubo()
@@ -61,23 +104,33 @@ def movimenta_frente(sentido):
 def roda_eixoY(sentido):
     
     if sentido == 'horario':
-        base_hor._movEsquerda()
+        base._movDireita()
     else:
-        base_hor._movDireita()
+        base._movEsquerda()
         
 def roda_eixoZ(sentido):
     
     if sentido == 'horario':
-        base_hor._movDireita()
+        base._movDireita()
         braco._segurarCubo()
         braco._girarCubo()
+<<<<<<< Updated upstream:main.py
         base_hor._movEsquerda()
+=======
+        braco._voltarPosicaoOriginal()
+        base._movEsquerda()
+>>>>>>> Stashed changes:collector/main.py
         
     else:
-        base_hor._movEsquerda()
+        base._movEsquerda()
         braco._segurarCubo()
         braco._girarCubo()
+<<<<<<< Updated upstream:main.py
         base_hor._movDireita()
+=======
+        braco._voltarPosicaoOriginal()
+        base._movDireita()
+>>>>>>> Stashed changes:collector/main.py
 
 def verifica_direcao(movimento):
     
@@ -133,12 +186,13 @@ def verifica_movimento(movimento):
 
         return direcao, sentido
     
-f = open(arquivo,"r")
-movimentos = json.loads(f.read())
+# f = open(arquivo,"r")
+# movimentos = json.loads(f.read())
 
-for i in movimentos:
-    direcao, sentido = verifica_movimento(i)
+# for i in movimentos:
+#     direcao, sentido = verifica_movimento(i)
     
+<<<<<<< Updated upstream:main.py
     if direcao == 'rotacionaX':
         
     elif direcao == 'rotacionaY':
@@ -146,14 +200,38 @@ for i in movimentos:
     elif direcao == 'rotacionaZ':
     
     elif direcao == 'rotacionaX':
+=======
+#     if direcao == 'rotacionaX':
+#         roda_eixoX(sentido)
         
-    elif direcao == 'rotacionaX':
+#     elif direcao == 'rotacionaY':
+#         roda_eixoY(sentido)
+        
+#     elif direcao == 'rotacionaZ':
+#         roda_eixoZ(sentido)
+direcao = 'esquerda'
+sentido = 'horario'
+
+
+if direcao == 'rotacionaX':
+    roda_eixoX(sentido)
+        
+elif direcao == 'rotacionaY':
+    roda_eixoY(sentido)
+        
+elif direcao == 'rotacionaZ':
+    roda_eixoZ(sentido)
+elif direcao == 'esquerda':
+    movimenta_esquerda(sentido)
+>>>>>>> Stashed changes:collector/main.py
+        
+    # elif direcao == 'rotacionaX':
     print(direcao)
     print(sentido)
 
 
 
-f.close()
+#f.close()
 
 # # Movimento braço
 # # braco =  Braco(Motor(Port.A, Direction.CLOCKWISE, None))
