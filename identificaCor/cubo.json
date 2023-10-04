@@ -1,86 +1,69 @@
 {
   "Amarelo": [
     [
-      "",
-      "",
-      ""
+      "Azul",
+      "Verde",
+      "Vermelho"
     ],
     [
-      "",
-      "",
-      ""
+      "Vermelho",
+      "Amarelo",
+      "Branco"
     ],
     [
-      "",
-      "",
-      ""
+      "Laranja",
+      "Amarelo",
+      "Amarelo"
     ]
   ],
   "Vermelho": [
     [
       "",
-      "",
-      ""
+      "Vermelho",
+      "Azul"
     ],
     [
-      "",
-      "",
-      ""
+      "Verde",
+      "Vermelho",
+      "Azul"
     ],
     [
-      "",
-      "",
+      "Branco",
+      "Laranja",
       ""
     ]
   ],
   "Branco": [
     [
-      "",
-      "",
+      "Vermelho",
+      "Branco",
+      "Branco"
+    ],
+    [
+      "Azul",
+      "Branco",
       ""
     ],
     [
-      "",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
+      "Azul",
+      "Branco",
       ""
     ]
   ],
   "Laranja": [
     [
-      "",
-      "",
-      ""
+      "Laranja",
+      "Laranja",
+      "Laranja"
     ],
     [
-      "",
-      "",
-      ""
+      "Laranja",
+      "Laranja",
+      "Laranja"
     ],
     [
-      "",
-      "",
-      ""
-    ]
-  ],
-  "Azul": [
-    [
-      "",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
+      "Laranja",
+      "Laranja",
       ""
     ]
   ],
@@ -100,5 +83,30 @@
       "Branco",
       "Verde"
     ]
+  ],
+  "Azul": [
+    [
+      "Branco",
+      "Amarelo",
+      "Laranja"
+    ],
+    [
+      "Laranja",
+      "Azul",
+      "Amarelo"
+    ],
+    [
+      "Laranja",
+      "Verde",
+      "Verde"
+    ]
+  ],
+  "ordem": [
+    "Amarelo",
+    "Vermelho",
+    "Branco",
+    "Laranja",
+    "Verde",
+    "Azul"
   ]
 }
