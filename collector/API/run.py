@@ -7,6 +7,10 @@ app = Flask(__name__)
 UPLOAD_FOLDER = 'imagens'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+@app.route('/', methods=['GET'])
+def conectado():
+    return jsonify({'message': 'OK'})
+    
 @app.route('/upload', methods=['POST'])
 def upload_file():
     # Verifique se o diretório de upload existe
