@@ -1,42 +1,7 @@
 import numpy as np
-import argparse
 import cv2
 import os
 import json
-from classCubo import orientacao
-
-cores = { 
-    "Branco": [
-        ["", "", ""],
-        ["", "", ""],
-        ["", "", ""]
-    ],
-    "Vermelho": [
-        ["", "", ""],
-        ["", "", ""],
-        ["", "", ""]
-    ],
-    "Azul": [
-        ["", "", ""],
-        ["", "", ""],
-        ["", "", ""]
-    ],
-    "Verde": [
-        ["", "", ""],
-        ["", "", ""],
-        ["", "", ""]
-    ], 
-    "Amarelo": [
-        ["", "", ""],
-        ["", "", ""],
-        ["", "", ""]
-    ], 
-    "Laranja": [
-        ["", "", ""],
-        ["", "", ""],
-        ["", "", ""]
-    ]
-}
 
 boundaries = [                                                    #LISTA PARAMETRO DAS CORES
     ([50, 180, 210], [90, 210, 240]),      # amarelo 0
@@ -46,219 +11,77 @@ boundaries = [                                                    #LISTA PARAMET
     ([100, 90, 90], [255, 255, 255]),      # branco 
     ([86, 31, 4], [220, 135, 70]),         # azul  5
 ]
-
 listaCoordenadas = [                                              #LISTA DAS COORDENADAS DE CADA PARTE DO CUBO
-    ([169, 50]),          # coordenada 0,0      0
-    ([219, 51]),          # coordenada 0,1      1
-    ([280, 47]),          # coordenada 0,2      2
-    ([165, 111]),         # coordenada 1,0      3
-    ([217, 112]),         # coordenada 1,1      4     CENTRO
-    ([280, 116]),         # coordenada 1,2      5
-    ([165, 171]),         # coordenada 2,0      6
-    ([216, 178]),         # coordenada 2,1      7
-    ([275, 182]),         # coordenada 2,2      8
-]
-
-partesCubo = [                                                    #LISTA DAS PARTES DO CUBO
-    ([0, 0]),    # 0
-    ([0, 1]),    # 1
-    ([0, 2]),    # 2
-    ([1, 0]),    # 3
-    ([1, 1]),    # 4
-    ([1, 2]),    # 5
-    ([2, 0]),    # 6
-    ([2, 1]),    # 7
-    ([2, 2]),    # 8
+    [169, 50],          # coordenada 0,0      
+    [165, 111],         # coordenada 0,1      
+    [165, 171],         # coordenada 0,2      
+    [219, 51],          # coordenada 1,0      
+    [217, 112],         # coordenada 1,1           CENTRO
+    [216, 178],         # coordenada 1,2      
+    [280, 47],          # coordenada 2,0      
+    [280, 116],         # coordenada 2,1      
+    [275, 182],         # coordenada 2,2      
 ]
 
 lista = ["Amarelo", "Verde", "Laranja", "Vermelho", "Branco", "Azul"]
 
-imagensIniciais = ["face1.png", "face2.png", "face3.png", "face4.png", "face5.png", "face6.png"]
-imagensDefinidas = ["", "", "", "", "", ""]
-ordemLeitura = []
-mapaCubo = ["Azul", "Verde", "Laranja", "Vermelho", "Amarelo", "Branco"]
-
-
-def DefinirCentroFace(posicaoCorEncontrada, posicaoCaminhoImg):          #FUNCAO PARA RENOMEAR AS IMAGENS DE ACORDO COM O CENTRO DU CUBO
-    if (posicaoCorEncontrada == 0):                                      #se a cor encontrada foi amarelo... (baseado nalista boundaries)
-        novoNome = "Amarelo.png"
-        imagensDefinidas[posicaoCaminhoImg] = "Amarelo.png"
-        ordemLeitura.append("Amarelo")
-    elif (posicaoCorEncontrada == 1):
-        novoNome = "Verde.png"
-        imagensDefinidas[posicaoCaminhoImg] = "Verde.png"
-        ordemLeitura.append("Verde")
-    elif (posicaoCorEncontrada == 2):
-        novoNome = "Laranja.png"
-        imagensDefinidas[posicaoCaminhoImg] = "Laranja.png"
-        ordemLeitura.append("Laranja")
-    elif (posicaoCorEncontrada == 3):
-        novoNome = "Vermelho.png"
-        imagensDefinidas[posicaoCaminhoImg] = "Vermelho.png"
-        ordemLeitura.append("Vermelho")
-    elif (posicaoCorEncontrada == 4):
-        novoNome = "Branco.png"
-        imagensDefinidas[posicaoCaminhoImg] = "Branco.png"
-        ordemLeitura.append("Branco")
-    elif (posicaoCorEncontrada == 5):
-        novoNome = "Azul.png"
-        imagensDefinidas[posicaoCaminhoImg] = "Azul.png"
-        ordemLeitura.append("Azul")
-
-    nomeAntigo = imagensIniciais[posicaoCaminhoImg]
-    nomeNovo = novoNome
-    os.rename(nomeAntigo, nomeNovo)
-
-    return ordemLeitura
-
-
-def RetornarCorEncontrada(corEncontrada):
-    if (corEncontrada == 0):                                                      
-        return "Amarelo"
-    elif (corEncontrada == 1):
-        return "Verde"
-    elif (corEncontrada == 2):
-        return "Laranja"
-    elif (corEncontrada == 3):
-        return "Vermelho"
-    elif (corEncontrada == 4):
-        return "Branco"
-    elif (corEncontrada == 5):
-        return "Azul"
+def giraFace(n, face, sentido="antiorario"):
     
-
-def RetornarDataFace(imagem):
-    if (imagem == 'Vermelho.png'):
-        return 'Vermelho'
-    elif (imagem == 'Verde.png'):
-        return 'Verde'
-    elif (imagem == 'Laranja.png'):
-        return 'Laranja'
-    elif (imagem == 'Azul.png'):
-        return 'Azul'
-    elif (imagem == 'Branco.png'):
-        return 'Branco'
-    elif (imagem == 'Amarelo.png'):
-        return 'Amarelo'
-
-
-def ArmazenarCorEncontrada(corEncontrada, parteXcubo, parteYcubo, imagem):
-    encontrouCor = RetornarCorEncontrada(corEncontrada)
-    dataFace = RetornarDataFace(imagem)
-    
-    for i in range(3):
-        for j in range (3):
-            if ((i == parteYcubo)and(j == parteXcubo)):
-                cores[dataFace][i][j] = encontrouCor
-    return cores
-    
-
-def DeletarRestoCores(excecao):
-    for i, cor in enumerate(lista):
-        if (cor != excecao):
-            del cores[cor]
-
- 
-def ConstruirObjeto(imgCaminho, arquivoPng): 
-    if (imgCaminho == 0):                     #FUNCAO QUE INICIA O ARQUIVO CUBO.JSON
-        if (arquivoPng == 'Vermelho.png'):                   #vai verificar em qual posicao 
-            excecao = 'Vermelho'
-        elif (arquivoPng == 'Verde.png'):
-            excecao = 'Verde'
-        elif (arquivoPng == 'Laranja.png'):
-            excecao = 'Laranja'
-        elif (arquivoPng == 'Azul.png'):
-            excecao = 'Azul'
-        elif (arquivoPng == 'Branco.png'):
-            excecao = 'Branco'
-        elif (arquivoPng == 'Amarelo.png'):
-            excecao = 'Amarelo'
-        DeletarRestoCores(excecao)
-    
+    if sentido == "antiorario":
+        for _ in range(n):
+            # Transformar as linhas em colunas
+            face = list(map(list, zip(*[list(reversed(linha)) for linha in face])))
     else:
-        if (arquivoPng == 'Vermelho.png'):                   #vai verificar em qual posicao 
-            fazerFace = 'Vermelho'
-        elif (arquivoPng == 'Verde.png'):
-            fazerFace = 'Verde'
-        elif (arquivoPng == 'Laranja.png'):
-            fazerFace = 'Laranja'
-        elif (arquivoPng == 'Azul.png'):
-            fazerFace = 'Azul'
-        elif (arquivoPng == 'Branco.png'):
-            fazerFace = 'Branco'
-        elif (arquivoPng == 'Amarelo.png'):
-            fazerFace = 'Amarelo'
-        cores[fazerFace] = [["","",""], ["","",""], ["","",""]]
-    # with open('cubo.json', 'w') as json_file:
-    #     json.dump(cores, json_file, indent=2)
+        for _ in range(n):
+            # Transformar as linhas em colunas sem inverter
+            face = [list(linha) for linha in zip(*face[::-1])]
 
+    return face
 
-def Orientacao(imgCaminho, ordemLeitura):
-    if (imgCaminho == 0):
-        orientacaoY = ordemLeitura[0]
-        return orientacaoY 
-    elif (imgCaminho == 1):
-        orientacaoX = ordemLeitura[1]
-        return orientacaoX
-    elif (imgCaminho == 4):
-        orientacaoZ = ordemLeitura[4]
-        return orientacaoZ
+def ordena(cubo, ordem_leitura):
+    print(giraFace(0, cubo["Amarelo"],  "horario"))
+    print(giraFace(1, cubo["Amarelo"],  "horario"))
+    print(giraFace(2, cubo["Amarelo"],  "horario"))
+    return cubo
 
-
-imgCaminho, caminhoImg, defCor, verificaJson = 0, 0, 0, 0
-
-for caminhoImg, caminho in enumerate(imagensIniciais):             #esse loop pega os caminhos de imagem da lista de imagens iniciais e 
-    image = cv2.imread(caminho)                                    #define a cor do meio do cubo na foto, renomeando pra cor indicada
-    (h, w) = image.shape[:2]
-
-    rgbCentro = image[217, 112]
-    parametroCor = 0
-    
+def getCor(rgb):
     for parametroCor, (lower, upper) in enumerate(boundaries):
-        lower = np.array(lower, dtype="uint8")
-        upper = np.array(upper, dtype="uint8")
-
-        if ((lower[0] <= rgbCentro[0]) and (rgbCentro[0] <= upper[0])):
-            if ((lower[1] <= rgbCentro[1]) and (rgbCentro[1] <= upper[1])):
-                if ((lower[2] <= rgbCentro[2]) and (rgbCentro[2] <= upper[2])):
-                    DefinirCentroFace(parametroCor, caminhoImg)
-                    Orientacao(imgCaminho, ordemLeitura)
-                    break
-
-for imgCaminho, imagem in enumerate(imagensDefinidas):                   #esse loop pega os novos caminhos de imagem e define as cores em cada parte do cubo
-    image = cv2.imread(imagem)
-    (h, w) = image.shape[:2]
-
-    if (defCor == 1):
-        os.remove(imagensDefinidas[imgCaminho-1])
-
-    ConstruirObjeto(imgCaminho, imagem)  
-    defCor = 0
-    coordenada = 0
-
-    for coordenada, (y, x) in enumerate(listaCoordenadas):
-        rgb = image[y, x]
-        coordenadaX, coordenadaY = partesCubo[coordenada]
-        parametroCor = 0
-
-        for parametroCor, (lower, upper) in enumerate(boundaries):
-            if (defCor==1):
-                break
             lower = np.array(lower, dtype="uint8")
             upper = np.array(upper, dtype="uint8")
-
             if ((lower[0] <= rgb[0]) and (rgb[0] <= upper[0])):
                 if ((lower[1] <= rgb[1]) and (rgb[1] <= upper[1])):
                     if ((lower[2] <= rgb[2]) and (rgb[2] <= upper[2])):
-                        ArmazenarCorEncontrada(parametroCor, coordenadaX, coordenadaY, imagem)
+                        return lista[parametroCor]
 
-    if (imgCaminho == 5):
-        os.remove(imagensDefinidas[imgCaminho])
-    defCor=1
+def getCorFace(image):
+    face, linha  = [], []
+    
+    for (y, x) in listaCoordenadas:
+        rgb = image[y, x]
+        linha.append(getCor(rgb))
+        if len(linha) == 3:
+            face.append(linha)
+            linha = []
+    return face
 
-cores["ordem"] = ordemLeitura
+def getCubo():
+    cubo = {}
+    ordem_leitura=[]
+    
+    for i in range(6):
+        arquivo = "face"+str(i+1)+".png"
+        
+        image = cv2.imread(arquivo)
+        (h, w) = image.shape[:2]
+        
+        face = getCorFace(image)
+        cubo[face[1][1]] = face
+        ordem_leitura.append(face[1][1])
+        
+        # os.remove(arquivo)
+    return ordena(cubo, ordem_leitura)
 
-print(ordemLeitura)
-with open('cubo.json', 'w') as json_file:
-    json.dump(cores, json_file, indent=2)
-            
+if __name__ == '__main__':
+    
+    with open('cubo.json', 'w') as json_file:
+        json.dump(getCubo(), json_file, indent=2)

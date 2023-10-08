@@ -18,7 +18,7 @@
   ],
   "Vermelho": [
     [
-      "",
+      null,
       "Vermelho",
       "Azul"
     ],
@@ -30,7 +30,7 @@
     [
       "Branco",
       "Laranja",
-      ""
+      null
     ]
   ],
   "Branco": [
@@ -42,12 +42,12 @@
     [
       "Azul",
       "Branco",
-      ""
+      null
     ],
     [
       "Azul",
       "Branco",
-      ""
+      null
     ]
   ],
   "Laranja": [
@@ -64,12 +64,12 @@
     [
       "Laranja",
       "Laranja",
-      ""
+      null
     ]
   ],
   "Verde": [
     [
-      "",
+      null,
       "Branco",
       "Branco"
     ],
@@ -100,13 +100,5 @@
       "Verde",
       "Verde"
     ]
-  ],
-  "ordem": [
-    "Amarelo",
-    "Vermelho",
-    "Branco",
-    "Laranja",
-    "Verde",
-    "Azul"
   ]
 }
