@@ -40,20 +40,17 @@ def giraFace(face, sentido="antiorario", n=1):
 
 def ordena(cubo, ordem_leitura):
     for i, item in enumerate(ordem_leitura):
-        if(i == 0 and item == "Amarelo"):
-            cubo["Amarelo"] = giraFace(cubo["Amarelo"],  "antiorario")
-        elif(i == 1 and item == "Vermelho"):
-            pass
-        elif(i == 2 and item == "Branco"):
-            cubo["Branco"] = giraFace(cubo["Branco"],  "horario")
-        elif(i == 3 and item == "Laranja"):
-            cubo["Laranja"] = giraFace(cubo["Laranja"], "horario", 2)
-        elif(i == 4 and item == "Verde"):
-            cubo["Verde"] = giraFace(cubo["Verde"],  "antiorario")
-        elif(i == 5 and item == "Azul"):
-            cubo["Verde"] = giraFace(cubo["Verde"],  "antiorario")
-        else:
-            print("Cubo fora de posição")
+        sentido = 'antiorario'
+        giros = 1
+
+        if(i == 1):
+            continue
+        elif(i == 2):
+            sentido = "horario"
+        elif(i == 3):
+            giros = 2
+
+        cubo[item] = giraFace(cubo[item],  sentido, giros)
     return cubo
 
 def getCor(rgb):
