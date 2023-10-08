@@ -25,7 +25,7 @@ listaCoordenadas = [                                              #LISTA DAS COO
 
 lista = ["Amarelo", "Verde", "Laranja", "Vermelho", "Branco", "Azul"]
 
-def giraFace(n, face, sentido="antiorario"):
+def giraFace(face, sentido="antiorario", n=1):
     
     if sentido == "antiorario":
         for _ in range(n):
@@ -39,9 +39,21 @@ def giraFace(n, face, sentido="antiorario"):
     return face
 
 def ordena(cubo, ordem_leitura):
-    print(giraFace(0, cubo["Amarelo"],  "horario"))
-    print(giraFace(1, cubo["Amarelo"],  "horario"))
-    print(giraFace(2, cubo["Amarelo"],  "horario"))
+    for i, item in enumerate(ordem_leitura):
+        if(i == 0 and item == "Amarelo"):
+            cubo["Amarelo"] = giraFace(cubo["Amarelo"],  "antiorario")
+        elif(i == 1 and item == "Vermelho"):
+            pass
+        elif(i == 2 and item == "Branco"):
+            cubo["Branco"] = giraFace(cubo["Branco"],  "horario")
+        elif(i == 3 and item == "Laranja"):
+            cubo["Laranja"] = giraFace(cubo["Laranja"], "horario", 2)
+        elif(i == 4 and item == "Verde"):
+            cubo["Verde"] = giraFace(cubo["Verde"],  "antiorario")
+        elif(i == 5 and item == "Azul"):
+            cubo["Verde"] = giraFace(cubo["Verde"],  "antiorario")
+        else:
+            print("Cubo fora de posição")
     return cubo
 
 def getCor(rgb):
