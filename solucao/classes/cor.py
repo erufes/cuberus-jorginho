@@ -1,7 +1,6 @@
+from classes.ordenacao  import *
 import numpy as np
 import cv2
-import json
-from rubik.cube import Cube
 
 boundaries = [                                                    #LISTA PARAMETRO DAS CORES
     ([50, 180, 210], [90, 210, 240]),      # amarelo 0
@@ -22,7 +21,6 @@ listaCoordenadas = [                                              #LISTA DAS COO
     [280, 116],         # coordenada 2,1      
     [275, 182],         # coordenada 2,2      
 ]
-
 lista = [
     ("Y", "Amarelo"),
     ("G", "Verde"), 
@@ -31,19 +29,6 @@ lista = [
     ("W", "Branco"), 
     ("B", "Azul")  
 ]
-
-def giraFace(face, sentido="antiorario", n=1):
-    
-    if sentido == "antiorario":
-        for _ in range(n):
-            # Transformar as linhas em colunas
-            face = list(map(list, zip(*[list(reversed(linha)) for linha in face])))
-    else:
-        for _ in range(n):
-            # Transformar as linhas em colunas sem inverter
-            face = [list(linha) for linha in zip(*face[::-1])]
-
-    return face
 
 def getSTRCubo(cubo, ordem_leitura):
     ordem_str = [ordem_leitura[0], ordem_leitura[3], ordem_leitura[5],ordem_leitura[1],ordem_leitura[4],ordem_leitura[2]]
@@ -58,21 +43,6 @@ def getSTRCubo(cubo, ordem_leitura):
     str_concatenada += ''.join([elemento for linha in cubo[ordem_str[-1]] for elemento in linha])
     
     return str_concatenada
-
-def ordena(cubo, ordem_leitura):
-    for i, item in enumerate(ordem_leitura):
-        sentido = 'antiorario'
-        giros = 1
-
-        if(i == 1):
-            continue
-        elif(i == 2):
-            sentido = "horario"
-        elif(i == 3):
-            giros = 2
-
-        cubo[item] = giraFace(cubo[item],  sentido, giros)
-    return cubo
 
 def getCor(rgb):
     for parametroCor, (lower, upper) in enumerate(boundaries):
@@ -110,12 +80,12 @@ def getCorFace(image):
             linha = []
     return face
 
-def getCubo():
+def getCorCubo():
     cubo = {}
     ordem_leitura=[]
     
     for i in range(6):
-        arquivo = "face"+str(i+1)+".png"
+        arquivo = "fotos/face"+str(i+1)+".png"
         
         image = cv2.imread(arquivo)
         (h, w) = image.shape[:2]
@@ -130,9 +100,3 @@ def getCubo():
     
     cubo = ordena(cubo, ordem_leitura)
     return getSTRCubo(cubo, ordem_leitura)
-
-if __name__ == '__main__':
-    with open('cubo.txt', 'w') as json_file:
-        c = Cube(getCubo())
-        print(c)
-        json.dump(getCubo(), json_file, indent=2)
