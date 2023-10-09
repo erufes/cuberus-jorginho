@@ -32,6 +32,19 @@ lista = [
     ("B", "Azul")  
 ]
 
+def giraFace(face, sentido="antiorario", n=1):
+    
+    if sentido == "antiorario":
+        for _ in range(n):
+            # Transformar as linhas em colunas
+            face = list(map(list, zip(*[list(reversed(linha)) for linha in face])))
+    else:
+        for _ in range(n):
+            # Transformar as linhas em colunas sem inverter
+            face = [list(linha) for linha in zip(*face[::-1])]
+
+    return face
+
 def getSTRCubo(cubo, ordem_leitura):
     ordem_str = [ordem_leitura[0], ordem_leitura[3], ordem_leitura[5],ordem_leitura[1],ordem_leitura[4],ordem_leitura[2]]
     
@@ -45,19 +58,6 @@ def getSTRCubo(cubo, ordem_leitura):
     str_concatenada += ''.join([elemento for linha in cubo[ordem_str[-1]] for elemento in linha])
     
     return str_concatenada
-
-def giraFace(face, sentido="antiorario", n=1):
-    
-    if sentido == "antiorario":
-        for _ in range(n):
-            # Transformar as linhas em colunas
-            face = list(map(list, zip(*[list(reversed(linha)) for linha in face])))
-    else:
-        for _ in range(n):
-            # Transformar as linhas em colunas sem inverter
-            face = [list(linha) for linha in zip(*face[::-1])]
-
-    return face
 
 def ordena(cubo, ordem_leitura):
     for i, item in enumerate(ordem_leitura):
@@ -84,16 +84,26 @@ def getCor(rgb):
                         return lista[parametroCor][0]
 
 def getCorFace(image):
-    face, linha  = [], []
+    face, linha = [], []
     
     for (y, x) in listaCoordenadas:
-        rgb = image[y, x]
-        cor = getCor(rgb)
+        # Coletar cores em uma área maior ao redor do ponto
+        cores_proximas = []
+        for dy in range(-3, 4):  # Altere o alcance de dy
+            for dx in range(-3, 4):  # Altere o alcance de dx
+                new_y, new_x = y + dy, x + dx
+                if 0 <= new_y < image.shape[0] and 0 <= new_x < image.shape[1]:
+                    rgb = image[new_y, new_x]
+                    cor = getCor(rgb)
+                    if cor is not None:
+                        cores_proximas.append(cor)
+                    else:
+                        cores_proximas.append("N")
         
-        if cor is not None: 
-            linha.append(cor)
-        else:
-            linha.append('N')
+        # Encontrar a cor mais frequente na área maior
+        if cores_proximas:
+            cor_mais_frequente = max(set(cores_proximas), key=cores_proximas.count)
+            linha.append(cor_mais_frequente)
             
         if len(linha) == 3:
             face.append(linha)
@@ -123,4 +133,6 @@ def getCubo():
 
 if __name__ == '__main__':
     with open('cubo.txt', 'w') as json_file:
+        c = Cube(getCubo())
+        print(c)
         json.dump(getCubo(), json_file, indent=2)
