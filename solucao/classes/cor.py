@@ -1,4 +1,5 @@
 from classes.ordenacao  import *
+from PIL import Image
 import numpy as np
 import cv2
 
@@ -80,18 +81,36 @@ def getCorFace(image):
             linha = []
     return face
 
+def ajustaIMG():
+    for i in range(6):
+        arquivo = "fotos/face"+str(i+1)+".png"
+        
+        # creating a object 
+        image = Image.open(r"{}".format(arquivo))
+
+        MAX_SIZE = (500, 500)
+        image.thumbnail(MAX_SIZE)
+        
+        image_rotated = image.rotate(-90, expand=True)
+
+        # creating thumbnail
+        image_rotated.save(arquivo)
+
 def getCorCubo():
     cubo = {}
     ordem_leitura=[]
     
+    # ajustaIMG()
+    
     for i in range(6):
         arquivo = "fotos/face"+str(i+1)+".png"
         
-        image = cv2.imread(arquivo)
-        (h, w) = image.shape[:2]
+        img = cv2.imread(arquivo)
         
-        face = getCorFace(image)
+        (h, w) = img.shape[:2]
         
+        face = getCorFace(img)
+        print(face)
         centro = list(filter(lambda x: x[0] == face[1][1], lista))[0][1]
         
         cubo[centro] = face
