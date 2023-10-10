@@ -83,27 +83,27 @@ def getCorFace(image):
             linha = []
     return face
 
-def getCorCubo():
+def getCorCubo(debug = False):
     cubo = {}
     ordem_leitura=[]
 
     for i in range(6):
-        arquivo = "fotos/face"+str(i+1)+".png"
+        arquivo = "fotos/recortados/face"+str(i+1)+".png"
         
         img = cv2.imread(arquivo)
         
         face = getCorFace(img)
-        print(face)
         
-        cv2.imshow("Face - "+str(i+1), img)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        if debug:
+            print(face)
+            cv2.imshow("Face - "+str(i+1), img)
+            cv2.waitKey(0)
+            cv2.destroyAllWindows()
         
         centro = list(filter(lambda x: x[0] == face[1][1], lista))[0][1]
         
         cubo[centro] = face
         ordem_leitura.append(centro)
-        # os.remove(arquivo)
     
     cubo = ordena(cubo, ordem_leitura)
     return getSTRCubo(cubo, ordem_leitura)
