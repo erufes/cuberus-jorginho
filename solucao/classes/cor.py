@@ -3,25 +3,27 @@ from PIL import Image
 import numpy as np
 import cv2
 
-boundaries = [                                                    #LISTA PARAMETRO DAS CORES
-    ([50, 180, 210], [90, 210, 240]),      # amarelo 0
-    ([0, 153, 0], [110, 255, 102]),        # verde 1
-    ([0, 102, 230], [102, 178, 255]),      # laranja 2
-    ([30, 30, 200], [90, 80, 230]),        # vermelho 3
-    ([100, 90, 90], [255, 255, 255]),      # branco 
-    ([86, 31, 4], [220, 135, 70]),         # azul  5
+boundaries = [
+	([0, 173, 192], [90, 220, 242]),      #amarelo
+	([0, 153, 0], [110, 255, 102]),        #verde
+	([0, 102, 230], [102, 178, 255]),      #laranja
+	([20, 14, 180], [90, 80, 240]),        #vermelho
+	([165, 170, 170], [210, 225, 220]),    #branco
+	([86, 31, 4], [220, 155, 70]),         #azul 
 ]
+
 listaCoordenadas = [                                              #LISTA DAS COORDENADAS DE CADA PARTE DO CUBO
-    [169, 50],          # coordenada 0,0      
-    [165, 111],         # coordenada 0,1      
-    [165, 171],         # coordenada 0,2      
-    [219, 51],          # coordenada 1,0      
-    [217, 112],         # coordenada 1,1           CENTRO
-    [216, 178],         # coordenada 1,2      
-    [280, 47],          # coordenada 2,0      
-    [280, 116],         # coordenada 2,1      
-    [275, 182],         # coordenada 2,2      
+    [37, 37],          # coordenada 0,0      
+    [110, 37],         # coordenada 0,1      
+    [183, 37],         # coordenada 0,2      
+    [31, 103],          # coordenada 1,0      
+    [114, 103],         # coordenada 1,1           CENTRO
+    [188, 103],         # coordenada 1,2      
+    [40, 179],          # coordenada 2,0      
+    [125, 179],         # coordenada 2,1      
+    [190, 165],         # coordenada 2,2      
 ]
+
 lista = [
     ("Y", "Amarelo"),
     ("G", "Verde"), 
@@ -57,11 +59,11 @@ def getCor(rgb):
 def getCorFace(image):
     face, linha = [], []
     
-    for (y, x) in listaCoordenadas:
+    for (x, y) in listaCoordenadas:
         # Coletar cores em uma área maior ao redor do ponto
         cores_proximas = []
-        for dy in range(-3, 4):  # Altere o alcance de dy
-            for dx in range(-3, 4):  # Altere o alcance de dx
+        for dy in range(-2, 3):  # Altere o alcance de dy
+            for dx in range(-2, 3):  # Altere o alcance de dx
                 new_y, new_x = y + dy, x + dx
                 if 0 <= new_y < image.shape[0] and 0 <= new_x < image.shape[1]:
                     rgb = image[new_y, new_x]
@@ -81,36 +83,22 @@ def getCorFace(image):
             linha = []
     return face
 
-def ajustaIMG():
-    for i in range(6):
-        arquivo = "fotos/face"+str(i+1)+".png"
-        
-        # creating a object 
-        image = Image.open(r"{}".format(arquivo))
-
-        MAX_SIZE = (500, 500)
-        image.thumbnail(MAX_SIZE)
-        
-        image_rotated = image.rotate(-90, expand=True)
-
-        # creating thumbnail
-        image_rotated.save(arquivo)
-
 def getCorCubo():
     cubo = {}
     ordem_leitura=[]
-    
-    # ajustaIMG()
-    
+
     for i in range(6):
         arquivo = "fotos/face"+str(i+1)+".png"
         
         img = cv2.imread(arquivo)
         
-        (h, w) = img.shape[:2]
-        
         face = getCorFace(img)
         print(face)
+        
+        cv2.imshow("Face - "+str(i+1), img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+        
         centro = list(filter(lambda x: x[0] == face[1][1], lista))[0][1]
         
         cubo[centro] = face

@@ -2,21 +2,18 @@
 import numpy as np														#codigo que identifica as cores do cubo
 import argparse
 import cv2
-# construct the argument parse and parse the arguments
-ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--C:/Users/Arthur/Desktop/cuberus-jorginho-T2/cuberus-jorginho-T2/identificaCor/face1_t.png", help = "path to the image")
-args = vars(ap.parse_args())
+
 # load the image
-image = cv2.imread("face1_t.png")
+image = cv2.imread("face3.png")
 
 # define the list of boundaries
 boundaries = [
-	([50, 180, 210], [90, 210, 240]),      #amarelo
+	([0, 173, 192], [90, 220, 242]),      #amarelo
 	([0, 153, 0], [110, 255, 102]),        #verde
 	([0, 102, 230], [102, 178, 255]),      #laranja
-	([30, 30, 200], [90, 80, 230]),        #vermelho
-	([180, 180, 204], [255, 255, 255]),    #branco
-	([86, 31, 4], [220, 135, 70]),         #azul 
+	([20, 14, 180], [90, 80, 240]),        #vermelho
+	([165, 170, 170], [210, 225, 220]),    #branco
+	([86, 31, 4], [220, 155, 70]),         #azul 
 ]
 
 
