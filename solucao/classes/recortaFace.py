@@ -9,29 +9,28 @@ os.makedirs(output_dir, exist_ok=True)
 
 # Define as cores e seus limites em HSV
 colors = {
-    "yellow": ([0, 173, 192], [195, 248, 255]),
-    "green": ([0, 103, 0], [198, 255, 113]),
-    "orange": ([0, 60, 230], [160, 178, 255]),
-    "red": ([20, 9, 180], [115, 80, 255]),
-    "white": ([165, 170, 170], [210, 225, 220]),
-    "blue": ([86, 31, 0], [255, 155, 70]),
+	"orange": ([19, 84, 240], [188, 190, 255]),     #laranja
+	"yellow": ([35, 150, 205], [194, 255, 255]),   #amarelo
+	"green": ([55, 140, 10], [202, 255, 155]),      #verde
+	"red": ([12, 7, 190], [110, 87, 255]),          #vermelho
+	"white": ([187, 154, 161], [255, 255, 255]),    #branco
+	"blue": ([144, 45, 0], [255, 142, 12]),        	#azul 
 }
 
 # Função para identificar e destacar as cores na imagem
 def identify_colors(image):
-    hsv_img = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     identified_rectangles = []
 
     for color, (lower, upper) in colors.items():
         lower = np.array(lower, dtype="uint8")
         upper = np.array(upper, dtype="uint8")
 
-        mask = cv2.inRange(hsv_img, lower, upper)
-
+        mask = cv2.inRange(image, lower, upper)
+        
         contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         for contour in contours:
             x, y, w, h = cv2.boundingRect(contour)
-            if w > 50 and h > 50 and 0 <= x <= image.shape[1] and 0 <= y <= image.shape[0]:
+            if w > 40 and h > 40 and 0 <= x <= image.shape[1] and 0 <= y <= image.shape[0]:
                 identified_rectangles.append((x, y, w, h))
 
     return identified_rectangles
@@ -55,21 +54,26 @@ def recortarall(debug = False):
     # Redimensione todas as imagens para a mesma largura e altura
     target_width = 400
     target_height = 500
-    margin = 2  # Margem em pixels
-    distance_threshold = 180  # Limite de distância para filtrar retângulos
+    margin = 0  # Margem em pixels
+    distance_threshold = 200  # Limite de distância para filtrar retângulos
 
-    for num in range(1, 7):
+    for num in range(2, 3):
         # Carregue a imagem
         image = cv2.imread("fotos/adjusted/face" + str(num) + ".png")
 
         # Redimensione a imagem para o tamanho alvo
-        image = cv2.resize(image, (target_width, target_height))
+        # image = cv2.resize(image, (target_width, target_height))
 
         # Clone a imagem original
         original_image = image.copy()
 
         # Identifique as cores e destaque na imagem
         rectangles = identify_colors(image)
+        
+        rect = original_image.copy()
+        for (x, y, w, h) in rectangles:
+            # Desenhe um único retângulo que engloba todos os retângulos identificados
+            cv2.rectangle(rect, (x, y), (w, h), (0, 255, 0), 2)
 
         # Filtrar retângulos com base na distância média
         filtered_rectangles = filter_rectangles(rectangles, distance_threshold)
@@ -93,6 +97,7 @@ def recortarall(debug = False):
             # Exiba a imagem resultante
             cv2.imshow("Identified Colors", image)
             cv2.imshow("Cropped Image", cropped_image)
+            cv2.imshow("Todos retangulos", rect)
             cv2.waitKey(0)
             cv2.destroyAllWindows()
         

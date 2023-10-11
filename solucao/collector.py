@@ -31,11 +31,11 @@ def ajustaIMG(rotate=False):
         # os.remove("fotos/"+arquivo)
 
 if __name__ == '__main__':
-    # ajustaIMG()
-    recortarall(debug=True)
+    ajustaIMG()
+    # recortarall(debug=True)
     
-    # c = Cube(getCorCubo())
-    # print(c)
+    c = Cube(getCorCubo())
+    print(c)
     # solver = Solver(c)
     # solver.solve()
     

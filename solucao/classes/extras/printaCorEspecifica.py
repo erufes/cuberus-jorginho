@@ -4,16 +4,16 @@ import argparse
 import cv2
 
 # load the image
-image = cv2.imread("../../fotos/face6.png")
+image = cv2.imread("../../fotos/adjusted/face1.png")
 
 # define the list of boundaries
 boundaries = [
-	("Amarelo", [103, 190, 240], [194, 255, 255]),      #amarelo
-	("Verde", [55, 140, 10], [202, 255, 155]),     #verde
-	("Laranja", [19, 84, 240], [188, 190, 255]),     #laranja
-	("Vermelho", [12, 7, 190], [110, 87, 255]),        #vermelho
-	("Branco", [187, 154, 161], [255, 255, 255]),    #branco
-	("Azul", [188, 54, 0], [255, 142, 12]),         #azul 
+	("Laranja", [19, 84, 240], [188, 190, 255]),    #laranja
+	("Amarelo", [35, 150, 205], [194, 255, 255]),  #amarelo
+	("Verde", [55, 140, 10], [202, 255, 155]),      #verde
+	("Vermelho", [12, 7, 190], [110, 87, 255]),     #vermelho
+	("Branco", [187, 154, 161], [255, 255, 255]),   #branco
+	("Azul", [144, 45, 0], [255, 142, 12]),        	#azul 
 ]
 
 # loop over the boundaries 

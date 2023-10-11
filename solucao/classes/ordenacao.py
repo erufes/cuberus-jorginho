@@ -15,13 +15,13 @@ def ordena(cubo, ordem_leitura):
     for i, item in enumerate(ordem_leitura):
         sentido = 'antiorario'
         giros = 1
-
+        
         if(i == 1):
             continue
-        elif(i == 2):
-            sentido = "horario"
         elif(i == 3):
-            giros = 2
+            giros = 2    
+        elif(i == 2 or i == 4 or i == 5):
+            sentido = "horario"
 
         cubo[item] = giraFace(cubo[item],  sentido, giros)
     return cubo
