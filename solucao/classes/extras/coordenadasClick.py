@@ -21,7 +21,7 @@ def click_event(event, x, y, flags, params):
       cv2.circle(img, (x, y), 3, (0, 255, 255), -1)
 
 # Leia a imagem de entrada
-img = cv2.imread('face3.png')
+img = cv2.imread("../../fotos/face6.png")
 
 # Crie uma janela
 cv2.namedWindow('Point Coordinates')
