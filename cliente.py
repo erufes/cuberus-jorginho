@@ -21,11 +21,12 @@ def recebe(file_path):
 # Exemplos de uso
 if __name__ == "__main__":
     # Solicitar movimentação
-    # movimenta_data = "Comando de movimento"
-    # response = movimenta(movimenta_data)
-    # print("Resposta de movimenta:", response)
+    # movimenta_data = "Base"
+    movimenta_data = "Braco"
+    response = movimenta(movimenta_data)
+    print("Resposta de movimenta:", response)
 
     # Enviar um arquivo .txt
-    arquivo_txt = "solucao/solucao.txt"  # Substitua pelo caminho do seu arquivo
-    response = recebe(arquivo_txt)
-    print("Resposta de recebe:", response)
+    # arquivo_txt = "solucao/solucao.txt"  # Substitua pelo caminho do seu arquivo
+    # response = recebe(arquivo_txt)
+    # print("Resposta de recebe:", response)

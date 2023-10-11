@@ -20,8 +20,24 @@ port = 4040
 
 # Função para lidar com a rota /movimenta
 def handle_movimenta(data):
-    # Lógica para processar os dados de movimenta aqui
     response_data = {"message": "Comando de movimenta recebido", "data": data}
+    
+    if data == "Braco":
+        # Movimento braço
+        braco =  Braco(Motor(Port.A, Direction.CLOCKWISE, None))
+        
+        braco.set_sentido(1)
+        braco.set_movimenta()
+        
+    elif data == "Base":
+        # Movimento Base
+        base =  Base(Motor(Port.B, Direction.CLOCKWISE, None), ev3)
+    
+        base.set_qtdMovimentos(1)
+        base.set_Direcao('d')
+        base.set_movimenta()
+        
+    # Lógica para processar os dados de movimenta aqui
     return json.dumps(response_data)
 
 # Função para lidar com a rota /recebe
@@ -40,10 +56,12 @@ def handle_client(client_socket):
         request_data = request.split("\r\n\r\n", 1)[-1]
         response = handle_movimenta(request_data)
         content_type = "application/json"
+        
     elif request.startswith("POST /recebe"):
         request_data = request.split("\r\n\r\n", 1)[-1]
         response = handle_recebe(request_data)
         content_type = "application/json"
+        
     else:
         response = json.dumps({"error": "Rota desconhecida"})
         content_type = "application/json"
