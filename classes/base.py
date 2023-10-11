@@ -21,14 +21,14 @@ class Base():
         if preso == False:
             self.motor.run_angle(1000, -270 * self.qtd, Stop.HOLD, True)
         else:
-            self.motor.run_angle(1000, -284 * self.qtd, Stop.HOLD, True)
+            self.motor.run_angle(1000, -270 * self.qtd, Stop.HOLD, True)
             
 
     def _movDireita(self, preso):
         if preso == False:
             self.motor.run_angle(1000, 270 * self.qtd, Stop.HOLD, True)
         else:
-            self.motor.run_angle(1000, 284 * self.qtd, Stop.HOLD, True)
+            self.motor.run_angle(1000, 270 * self.qtd, Stop.HOLD, True)
         
     # Set
     def set_qtdMovimentos(self, qtd=1):

@@ -9,7 +9,7 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 
 from classes.braco  import Braco
 from classes.base   import Base
-from classes.sensor import Sensor
+# from classes.sensor import Sensor
 import json
 import time
 
@@ -21,7 +21,7 @@ ev3 = EV3Brick()
 
 # Inicializa as partes do jorginho
 
-braco =  Braco(Motor(Port.A, Direction.COUNTERCLOCKWISE, None))
+braco =  Braco(Motor(Port.A, Direction.CLOCKWISE, None))
 base =  Base(Motor(Port.B, Direction.CLOCKWISE, None), ev3)
 #sensor =  Sensor(Motor(Port.C, Direction.CLOCKWISE, None))
 
@@ -62,14 +62,11 @@ def movimenta_esquerda(sentido):
         braco.set_movimenta()
         time.sleep(0.02)
         braco._segurarCubo()
-        braco._segurarCubo()
         base._movEsquerda(preso)
-        braco._voltarPosicaoOriginal()
         braco._voltarPosicaoOriginal()
         time.sleep(1)
         base._movEsquerda(not preso)
         base._movEsquerda(not preso)
-        braco.set_movimenta()
         braco.set_movimenta()
         base._movEsquerda(not preso)
         base._movEsquerda(not preso)
@@ -77,18 +74,14 @@ def movimenta_esquerda(sentido):
         braco.set_movimenta()
         time.sleep(0.02)
         braco._segurarCubo()
-        braco._segurarCubo()
         base._movDireita(preso)
-        braco._voltarPosicaoOriginal()
         braco._voltarPosicaoOriginal()
         time.sleep(1)
         base._movEsquerda(not preso)
         base._movEsquerda(not preso)
         braco.set_movimenta()
-        braco.set_movimenta()
         base._movEsquerda(not preso)
         base._movEsquerda(not preso)
-
 
 def movimenta_direita(sentido):
     
@@ -136,12 +129,74 @@ def movimenta_cima(sentido):
         braco._voltarPosicaoOriginal()
         braco.set_movimenta()
 
-# def movimenta_frente(sentido):
-#     if sentido == 'horario':
+def movimenta_frente(sentido):
+    if sentido == 'horario':
+        base._movEsquerda(not preso)
+        movimenta_esquerda('horario')
+        base._movDireita(not preso)
 
-#     else:
+    else:
+        base._movEsquerda(not preso)
+        movimenta_esquerda('anti horario')
+        base._movDireita(not preso)
 
+def movimenta_costas(sentido):
+    if sentido == 'horario':
+        base._movDireita(not preso)
+        movimenta_esquerda('horario')
+        base._movEsquerda(not preso)
 
+    else:
+        base._movDireita(not preso)
+        movimenta_esquerda('anti horario')
+        base._movEsquerda(not preso)
+
+def movimenta_baixo(sentido):
+    if sentido == 'horario':
+        braco._segurarCubo()
+        braco._segurarCubo()
+        base._movEsquerda(preso)
+        braco._voltarPosicaoOriginal()
+        braco._voltarPosicaoOriginal()
+        braco.set_movimenta()
+        braco.set_movimenta()
+        braco.set_movimenta()
+    else:
+        braco._segurarCubo()
+        braco._segurarCubo()
+        base._movDireita(preso)
+        braco._voltarPosicaoOriginal()
+        braco._voltarPosicaoOriginal()
+        braco.set_movimenta()
+        braco.set_movimenta()
+        braco.set_movimenta()
+        
+def roda_meio_em_pe(sentido):
+    if sentido == 'horario':
+        braco.set_movimenta()
+        braco._segurarCubo()
+        base._movEsquerda(preso)
+        braco._voltarPosicaoOriginal()
+        braco.set_movimenta()
+        braco.set_movimenta()
+        braco._segurarCubo()
+        base._movDireita(preso)
+        braco._voltarPosicaoOriginal()
+        base._movEsquerda(not preso)
+        braco.set_movimenta()
+        
+        
+    else:
+        braco.set_movimenta()
+        braco._segurarCubo()
+        base._movDireita(preso)
+        braco._voltarPosicaoOriginal()
+        braco.set_movimenta()
+        braco.set_movimenta()
+        braco._segurarCubo()
+        base._movEsquerda(preso)
+        braco._voltarPosicaoOriginal()
+        
 def verifica_direcao(movimento):
     
     if movimento == 'Fi' or movimento == 'F':
@@ -203,8 +258,8 @@ def verifica_movimento(movimento):
 # for i in movimentos:
 #     direcao, sentido = verifica_movimento(i)
     
-direcao = 'cima'
-sentido = 'anti horario'
+direcao = 'roda meio em pe'
+sentido = 'horario'
 
 if direcao == 'rotacionaX':
     roda_eixoX(sentido)
@@ -224,7 +279,18 @@ elif direcao == 'direita':
 elif direcao == 'cima':
     movimenta_cima(sentido)
 
+elif direcao == 'baixo':
+    movimenta_baixo(sentido)
 
+elif direcao == 'frente':
+    movimenta_frente(sentido)
+    
+elif direcao == 'costas':
+    movimenta_costas(sentido)
+    
+elif direcao == 'roda meio em pe':
+    roda_meio_em_pe(sentido)
+    
 print(direcao)
 print(sentido)
 
