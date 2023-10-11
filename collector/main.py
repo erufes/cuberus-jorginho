@@ -40,12 +40,14 @@ def handle_movimenta(data):
     # Lógica para processar os dados de movimenta aqui
     return json.dumps(response_data)
 
-# Função para lidar com a rota /recebe
-def handle_recebe(data):
-    # Lógica para processar a rota de recebe aqui
+# Função para lidar com a rota /enviar
+def handle_enviar(data):
+    # Lógica para processar a rota de enviar aqui
     # Por exemplo, salvar os dados recebidos em um arquivo .txt
-    with open("dados_recebidos.txt", "w") as file:
+    with open("solucao_cubo.txt", "w") as file:
         file.write(data)
+    
+    
     return json.dumps({"message": "Dados recebidos com sucesso"})
 
 def handle_client(client_socket):
@@ -57,9 +59,9 @@ def handle_client(client_socket):
         response = handle_movimenta(request_data)
         content_type = "application/json"
         
-    elif request.startswith("POST /recebe"):
+    elif request.startswith("POST /enviar"):
         request_data = request.split("\r\n\r\n", 1)[-1]
-        response = handle_recebe(request_data)
+        response = handle_enviar(request_data)
         content_type = "application/json"
         
     else:

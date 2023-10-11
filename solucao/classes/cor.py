@@ -1,4 +1,4 @@
-from classes.ordenacao  import *
+from solucao.classes.ordenacao  import *
 from PIL import Image
 import numpy as np
 import cv2
@@ -89,8 +89,7 @@ def getCorCubo(debug = False):
 
     for i in range(6):
         # arquivo = "fotos/recortados/face"+str(i+1)+".png"
-        arquivo = "fotos/adjusted/face"+str(i+1)+".png"
-        
+        arquivo = "solucao/fotos/adjusted/face"+str(i+1)+".png"
         img = cv2.imread(arquivo)
         
         face = getCorFace(img)
