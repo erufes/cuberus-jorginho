@@ -3,6 +3,8 @@ from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import Motor
 from pybricks.parameters import Port, Direction
 
+from classes.movimentacao import *
+
 from classes.braco  import Braco
 from classes.base   import Base
 
@@ -48,14 +50,29 @@ def handle_movimenta(data):
     return json.dumps(response_data)
 
 # Função para lidar com a rota /enviar
+func = { # dicionario de funções de movimento
+    "X":giraCuboEixoX,
+    "Y":giraCuboEixoY,
+    "Z":giraCuboEixoZ,
+    "L":movimentaFace,
+    "B":movimentaFaceTras,
+    "F":movimentaFaceFrente,
+    "R":movimentaFaceDireita,
+    "U":movimentaFaceSuperior,
+    "D":movimentaFaceInferior,
+    "M":movimentaMeridiano,
+    "E":movimentaEquador,
+    "S":movimentaMeridianoY,
+}
 def handle_enviar(data):
-    # Lógica para processar a rota de enviar aqui
-    # Por exemplo, salvar os dados recebidos em um arquivo .txt
-    with open("solucao_cubo.txt", "w") as file:
-        file.write(data)
+    direcao = 'Horario'
     
-    
-    return json.dumps({"message": "Dados recebidos com sucesso"})
+    for mov in list(data):
+        if "i" in mov:
+            direcao = 'Antihorario'
+        func[mov](direcao)
+        
+    return json.dumps({"message": "cubo solucionado"})
 
 def handle_client(client_socket):
     request = client_socket.recv(1024).decode('utf-8')
