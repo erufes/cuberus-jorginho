@@ -256,8 +256,6 @@ def movimentaMeridianoY(direcao):
         base._movDireita(SOLTO)
         movimentaMeridiano(HORARIO)
         base._movEsquerda(SOLTO)
-        braco.set_movimenta()
-        braco.set_movimenta()
     
     elif direcao == ANTIHORARIO:
         base._movDireita(SOLTO)
@@ -272,7 +270,7 @@ def movimentaMeridianoY(direcao):
 # for i in movimentos:
 #     direcao, sentido = verificaMovimento(i)
 
-direcao = 'meridiano Y'
+direcao = 'meridiano'
 sentido = ANTIHORARIO
       
 if direcao == 'rotacionaX':
