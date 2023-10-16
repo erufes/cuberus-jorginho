@@ -9,14 +9,14 @@ os.makedirs(output_dir, exist_ok=True)
 
 # Define as cores e seus limites em HSV
 colors = {
-	"blue": ([144, 32, 0], [255, 142, 12]),        	#azul
+	"blue": ([144, 32, 0], [255, 142, 9]),        	#azul
+	"green": ([117, 220, 66], [202, 255, 155]),      #verde
  
 	"orange": ([17, 72, 245], [111, 164, 255]),     #laranja
-	"yellow": ([59, 157, 201], [169, 237, 255]),   #amarelo
+	"yellow": ([59, 157, 201], [169, 255, 255]),   #amarelo
 	"red": ([7, 8, 176], [63, 60, 255]),          #vermelho
  
 	"white": ([175, 140, 144], [255, 255, 255]),    #branco
-	"green": ([38, 103, 0], [202, 255, 155]),      #verde
 }
 
 # Função para identificar e destacar as cores na imagem
@@ -34,8 +34,8 @@ def identify_colors(image):
             approx = cv2.approxPolyDP(contour, 0, False)
             x, y, w, h = cv2.boundingRect(approx)
             if w > 50 and h > 50 :
-                if x > 0 and y > 0:
-                    if x+w <= image.shape[1]-2 and y+h <= image.shape[0]-45:
+                if x > 25 and y > 30:
+                    if x+w <= image.shape[1]-45 and y+h <= image.shape[0]-87:
                         identified_rectangles.append((x, y, w+x, h+y))
                         
                         # print(x, y, w+x, h+y)
@@ -175,5 +175,6 @@ def recortarall(debug = False):
             cv2.waitKey(0)
             cv2.destroyAllWindows()
         
+        cropped_image_resized = cv2.resize(cropped_image, (300, 200))
         # Salve a face do cubo com o mesmo tamanho
-        cv2.imwrite(os.path.join(output_dir, f"face{num}.png"), cropped_image)
+        cv2.imwrite(os.path.join(output_dir, f"face{num}.png"), cropped_image_resized)

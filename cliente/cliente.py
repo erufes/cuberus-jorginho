@@ -1,4 +1,3 @@
-import imp
 import requests
 import configparser
 from PIL import Image 
@@ -37,48 +36,46 @@ def ajustaIMG(rotate=False, delete=False):
         if delete:
             os.remove("fotos/"+arquivo)
 
-def scam_cubo(): 
+def scam_cubo(url): 
     
     # Face 1
     tirar_foto()
         
     # Face 2
-    movimenta("Braco")
+    movimenta("Braco", url)
     tirar_foto()
-
     
     # Face 3
-    movimenta("Braco")
+    movimenta("Braco", url)
     tirar_foto()
     
     # Face 4
-    movimenta("Braco")
+    movimenta("Braco", url)
     tirar_foto()
    
     # Face 5
-    movimenta("Base")
-    movimenta("Braco")
+    movimenta("Base", url)
+    movimenta("Braco", url)
     tirar_foto()
     
     # Face 6
-    movimenta("Braco")
-    movimenta("Braco")
+    movimenta("Braco", url)
+    movimenta("Braco", url)
     tirar_foto()
     
-    movimenta("Base-e")
-    movimenta("Braco")
-    movimenta("Base-e")
+    movimenta("Base-e", url)
+    movimenta("Braco", url)
+    movimenta("Base-e", url)
     
 # Função para enviar dados para a URL de movimentação
-def movimenta(data):
-    url = f"{ev3_server_url}/movimenta"
-    
+def movimenta(data, url):
+    url = str(url) + '/movimenta'
     response = requests.post(url, data=data)
     return response.json()
 
 # Função para enviar um os passos de solução do cubo para a URL de envio
-def enviar(data):
-    url = f"{ev3_server_url}/enviar"
+def enviar(data, url):
+    url = str(url) + '/enviar'
     response = requests.post(url, data=data)
     return response.json()
 
@@ -89,13 +86,12 @@ if __name__ == "__main__":
     config.read("configuration/config_core.ini")
 
     ev3_server_url = config['CONFIGURATION']['host_EV3']  # Substitua pelo IP correto do seu EV3
+    # Inicia camera
+    # cube_video = threading.Thread(target=video)
+    # cube_video.start()
     
-    # # Inicia camera
-    # # cube_video = threading.Thread(target=video)
-    # # cube_video.start()
-    
-    # # Scaneia as faces
-    # scam_cubo()
+    # Scaneia as faces
+    # scam_cubo(ev3_server_url)
     
     # Ajusta tamanho das imagens
     ajustaIMG(rotate=config.getboolean('CONFIGURATION','rotate'),delete=config.getboolean('CONFIGURATION','apagar_image'))
@@ -110,8 +106,8 @@ if __name__ == "__main__":
         shutil.rmtree("fotos/adjusted")
         shutil.rmtree("fotos/recortados")
     
-    # Gera solução
-    solver = Solver(c)
-    solver.solve()
+    # # Gera solução
+    # solver = Solver(c)
+    # solver.solve()
     
-    print(solver.moves) # response = enviar(solver.moves)
+    # print(solver.moves) # response = enviar(solver.moves)

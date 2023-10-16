@@ -4,37 +4,37 @@ import numpy as np
 import cv2
 
 boundaries = [
-    ([144, 32, 0], [255, 142, 12]),     # azul 
+    ([144, 32, 0], [255, 142, 9]),     # azul 
+    ([117, 220, 66], [202, 255, 155]),    # verde
     
 	([17, 72, 245], [111, 164, 255]),   # laranja
-	([59, 157, 201], [169, 237, 255]),  # amarelo
+	([59, 157, 201], [169, 255, 255]),  # amarelo
 	([7, 8, 176], [63, 60, 255]),       # vermelho
  
 	([175, 140, 144], [255, 255, 255]), # branco
-    ([38, 103, 0], [202, 255, 155]),    # verde
 ]
 
 lista = [
     ("B", "Azul"),
+    ("G", "Verde"), 
     
     ("O", "Laranja"), 
     ("Y", "Amarelo"),
     ("R", "Vermelho"), 
     
     ("W", "Branco"), 
-    ("G", "Verde"), 
 ]
 
 listaCoordenadas = [                                              #LISTA DAS COORDENADAS DE CADA PARTE DO CUBO
-    [117, 22],          # coordenada 0,0      
-    [211, 27],          # coordenada 0,1      
-    [310, 31],          # coordenada 0,2      
-    [93, 84],           # coordenada 1,0      
-    [204, 93],          # coordenada 1,1           CENTRO
-    [318, 94],          # coordenada 1,2      
-    [73, 163],          # coordenada 2,0      
-    [199, 170],         # coordenada 2,1      
-    [322, 172],         # coordenada 2,2      
+    [60, 30],          # coordenada 0,0      
+    [155, 32],          # coordenada 0,1      
+    [245, 37],          # coordenada 0,2      
+    [53, 85],           # coordenada 1,0      
+    [148, 94],          # coordenada 1,1           CENTRO
+    [248, 92],          # coordenada 1,2      
+    [52, 150],          # coordenada 2,0      
+    [144, 159],         # coordenada 2,1      
+    [243, 160],         # coordenada 2,2      
 ]
 
 
@@ -67,19 +67,19 @@ def getCorFace(image):
     for (x, y) in listaCoordenadas:
         # Coletar cores em uma área maior ao redor do ponto
         cores_proximas = []
-        for dy in range(-5, 6):  # Altere o alcance de dy
-            for dx in range(-5, 6):  # Altere o alcance de dx
+        for dy in range(-3, 4):  # Altere o alcance de dy
+            for dx in range(-3, 4):  # Altere o alcance de dx
                 new_y, new_x = y + dy, x + dx
                 if 0 <= new_y < image.shape[0] and 0 <= new_x < image.shape[1]:
                     rgb = image[new_y, new_x]
                     cor = getCor(rgb)
                     if cor is not None:
                         cores_proximas.append(cor)
-                    else:
-                        cores_proximas.append("N")
         
         # Encontrar a cor mais frequente na área maior
-        if cores_proximas:
+        if len(cores_proximas) == 0:
+            linha.append("N")
+        elif cores_proximas:
             cor_mais_frequente = max(set(cores_proximas), key=cores_proximas.count)
             linha.append(cor_mais_frequente)
             
@@ -99,12 +99,12 @@ def getCorCubo(debug = False):
         
         face = getCorFace(img)
         
+        print(face)
         if debug:
             print(face)
             cv2.imshow("Face - "+str(i+1), img)
             cv2.waitKey(0)
             cv2.destroyAllWindows()
-        
         centro = list(filter(lambda x: x[0] == face[1][1], lista))[0][1]
         
         cubo[centro] = face

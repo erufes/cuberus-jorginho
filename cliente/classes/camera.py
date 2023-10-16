@@ -12,7 +12,7 @@ def tirar_foto():
         return    
     
     for num in range(1, 7):
-        nome_arquivo = f"solucao/fotos/face{num}.png"
+        nome_arquivo = f"fotos/face{num}.png"
         if os.path.exists(nome_arquivo):
             continue
 
