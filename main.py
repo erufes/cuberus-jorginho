@@ -220,12 +220,23 @@ def movimentaMeridiano(direcao):
     if direcao == HORARIO:
         movimentaFace(ANTIHORARIO)
         giraBase180(HORARIO,SOLTO)
-        movimentaFace(HORARIO)
-        giraBase180(HORARIO, SOLTO)
+        braco.set_movimenta()
+        braco._segurarCubo()
+        base._movEsquerda(PRESO)
+        braco._voltarPosicaoOriginal()
+        base._movEsquerda(SOLTO)
+        braco.set_movimenta()
+        
 
     elif direcao == ANTIHORARIO:
         movimentaFace(HORARIO)
-        movimentaFaceDireita(ANTIHORARIO)
+        giraBase180(HORARIO,SOLTO)
+        braco.set_movimenta()
+        braco._segurarCubo()
+        base._movDireita(PRESO)
+        braco._voltarPosicaoOriginal()
+        base._movEsquerda(SOLTO)
+        braco.set_movimenta()
 
 def movimentaEquador(direcao):
     # E
@@ -245,12 +256,15 @@ def movimentaMeridianoY(direcao):
         base._movDireita(SOLTO)
         movimentaMeridiano(HORARIO)
         base._movEsquerda(SOLTO)
+        braco.set_movimenta()
+        braco.set_movimenta()
     
     elif direcao == ANTIHORARIO:
         base._movDireita(SOLTO)
         movimentaMeridiano(ANTIHORARIO)
         base._movEsquerda(SOLTO)
-        
+        braco.set_movimenta()
+        braco.set_movimenta()
         
 # f = open(arquivo,"r")
 # movimentos = json.loads(f.read())
@@ -258,8 +272,8 @@ def movimentaMeridianoY(direcao):
 # for i in movimentos:
 #     direcao, sentido = verificaMovimento(i)
 
-direcao = 'meridiano'
-sentido = HORARIO
+direcao = 'meridiano Y'
+sentido = ANTIHORARIO
       
 if direcao == 'rotacionaX':
     giraCuboEixoX(sentido)
