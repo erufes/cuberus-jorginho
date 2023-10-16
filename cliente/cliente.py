@@ -1,8 +1,10 @@
+import imp
 import requests
 import configparser
 from PIL import Image 
 import threading
 import os
+import shutil
 
 from rubik.cube             import Cube
 from rubik.solve            import Solver
@@ -12,7 +14,7 @@ from classes.camera         import video
 from classes.recortaFace    import recortarall
 from classes.cor            import getCorCubo
 
-def ajustaIMG(rotate=False):
+def ajustaIMG(rotate=False, delete=False):
     for i in range(6):
         arquivo = "face"+str(i+1)+".png"
 
@@ -31,7 +33,9 @@ def ajustaIMG(rotate=False):
 
         # creating thumbnail
         image_rotated.save("fotos/adjusted/"+arquivo)
-        os.remove("fotos/"+arquivo)
+        
+        if delete:
+            os.remove("fotos/"+arquivo)
 
 def scam_cubo(): 
     
@@ -94,13 +98,17 @@ if __name__ == "__main__":
     # scam_cubo()
     
     # Ajusta tamanho das imagens
-    ajustaIMG(rotate=config.getboolean('CONFIGURATION','rotate'))
+    ajustaIMG(rotate=config.getboolean('CONFIGURATION','rotate'),delete=config.getboolean('CONFIGURATION','apagar_image'))
     
     recortarall(debug=config.getboolean('CONFIGURATION','debug_recort'))
     
     # Busca cores           
     c = Cube(getCorCubo())
     print(c)
+    
+    if config.getboolean('CONFIGURATION','apagar_image'):
+        shutil.rmtree("fotos/adjusted")
+        shutil.rmtree("fotos/recortados")
     
     # Gera solução
     solver = Solver(c)
