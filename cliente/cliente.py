@@ -91,23 +91,26 @@ if __name__ == "__main__":
     # cube_video.start()
     
     # Scaneia as faces
-    # scam_cubo(ev3_server_url)
+    scam_cubo(ev3_server_url)
     
     # Ajusta tamanho das imagens
     ajustaIMG(rotate=config.getboolean('CONFIGURATION','rotate'),delete=config.getboolean('CONFIGURATION','apagar_image'))
     
     recortarall(debug=config.getboolean('CONFIGURATION','debug_recort'))
     
-    # Busca cores           
-    c = Cube(getCorCubo())
-    print(c)
+    try:
+        # Busca cores           
+        c = Cube(getCorCubo())
+        print(c)
+        
+        if config.getboolean('CONFIGURATION','apagar_image'):
+            shutil.rmtree("fotos/adjusted")
+            shutil.rmtree("fotos/recortados")
+        
+        # Gera solução
+        solver = Solver(c)
+        solver.solve()
     
-    if config.getboolean('CONFIGURATION','apagar_image'):
-        shutil.rmtree("fotos/adjusted")
-        shutil.rmtree("fotos/recortados")
-    
-    # # Gera solução
-    # solver = Solver(c)
-    # solver.solve()
-    
-    # print(solver.moves) # response = enviar(solver.moves)
+        response = enviar(solver.moves, ev3_server_url)
+    except:
+        print("problema na identificação de cores")
