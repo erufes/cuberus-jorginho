@@ -1,37 +1,42 @@
-from solucao.classes.ordenacao  import *
+from classes.ordenacao  import *
 from PIL import Image
 import numpy as np
 import cv2
 
 boundaries = [
-	([19, 84, 240], [188, 190, 255]),    #laranja
-	([35, 150, 205], [194, 255, 255]),  #amarelo
-	([55, 140, 10], [202, 255, 155]),      #verde
-	([12, 7, 190], [110, 87, 255]),     #vermelho
-	([187, 154, 161], [255, 255, 255]),   #branco
-	([144, 45, 0], [255, 142, 12]),        	#azul 
-]
-
-listaCoordenadas = [                                              #LISTA DAS COORDENADAS DE CADA PARTE DO CUBO
-    [134, 125],          # coordenada 0,0      
-    [234, 130],         # coordenada 0,1      
-    [336, 132],         # coordenada 0,2      
-    [116, 188],          # coordenada 1,0      
-    [241, 191],         # coordenada 1,1           CENTRO
-    [352, 194],         # coordenada 1,2      
-    [112, 267],          # coordenada 2,0      
-    [244, 269],         # coordenada 2,1      
-    [119, 167],         # coordenada 2,2      
+    ([144, 32, 0], [255, 142, 12]),     # azul 
+    
+	([17, 72, 245], [111, 164, 255]),   # laranja
+	([59, 157, 201], [169, 237, 255]),  # amarelo
+	([7, 8, 176], [63, 60, 255]),       # vermelho
+ 
+	([175, 140, 144], [255, 255, 255]), # branco
+    ([38, 103, 0], [202, 255, 155]),    # verde
 ]
 
 lista = [
+    ("B", "Azul"),
+    
     ("O", "Laranja"), 
     ("Y", "Amarelo"),
-    ("G", "Verde"), 
     ("R", "Vermelho"), 
+    
     ("W", "Branco"), 
-    ("B", "Azul")  
+    ("G", "Verde"), 
 ]
+
+listaCoordenadas = [                                              #LISTA DAS COORDENADAS DE CADA PARTE DO CUBO
+    [117, 22],          # coordenada 0,0      
+    [211, 27],          # coordenada 0,1      
+    [310, 31],          # coordenada 0,2      
+    [93, 84],           # coordenada 1,0      
+    [204, 93],          # coordenada 1,1           CENTRO
+    [318, 94],          # coordenada 1,2      
+    [73, 163],          # coordenada 2,0      
+    [199, 170],         # coordenada 2,1      
+    [322, 172],         # coordenada 2,2      
+]
+
 
 def getSTRCubo(cubo, ordem_leitura):
     ordem_str = [ordem_leitura[0], ordem_leitura[3], ordem_leitura[5],ordem_leitura[1],ordem_leitura[4],ordem_leitura[2]]
@@ -62,8 +67,8 @@ def getCorFace(image):
     for (x, y) in listaCoordenadas:
         # Coletar cores em uma área maior ao redor do ponto
         cores_proximas = []
-        for dy in range(-1, 2):  # Altere o alcance de dy
-            for dx in range(-1, 2):  # Altere o alcance de dx
+        for dy in range(-5, 6):  # Altere o alcance de dy
+            for dx in range(-5, 6):  # Altere o alcance de dx
                 new_y, new_x = y + dy, x + dx
                 if 0 <= new_y < image.shape[0] and 0 <= new_x < image.shape[1]:
                     rgb = image[new_y, new_x]
@@ -88,8 +93,8 @@ def getCorCubo(debug = False):
     ordem_leitura=[]
 
     for i in range(6):
-        # arquivo = "fotos/recortados/face"+str(i+1)+".png"
-        arquivo = "solucao/fotos/adjusted/face"+str(i+1)+".png"
+        arquivo = "fotos/recortados/face"+str(i+1)+".png"
+        # arquivo = "fotos/adjusted/face"+str(i+1)+".png"
         img = cv2.imread(arquivo)
         
         face = getCorFace(img)

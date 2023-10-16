@@ -1,5 +1,4 @@
-import cv2 as cv                                                 #esse codigo pega uma imagem em alta resolucao e a diminui, sendo possivel
-                                                                 #de visualizar a imagem pelo pop-up do codigo que identifica as cores
+import cv2 as cv
 
 
 # importing Image class from PIL package 

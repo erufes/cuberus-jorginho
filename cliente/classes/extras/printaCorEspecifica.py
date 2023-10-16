@@ -1,19 +1,18 @@
 # import the necessary packages
 import numpy as np														#codigo que identifica as cores do cubo
-import argparse
 import cv2
 
-# load the image
-image = cv2.imread("../../fotos/adjusted/face1.png")
+# load the image 3
+image = cv2.imread("../../fotos/adjusted/face6.png")
 
 # define the list of boundaries
 boundaries = [
-	("Laranja", [19, 84, 240], [188, 190, 255]),    #laranja
-	("Amarelo", [35, 150, 205], [194, 255, 255]),  #amarelo
-	("Verde", [55, 140, 10], [202, 255, 155]),      #verde
-	("Vermelho", [12, 7, 190], [110, 87, 255]),     #vermelho
-	("Branco", [187, 154, 161], [255, 255, 255]),   #branco
-	("Azul", [144, 45, 0], [255, 142, 12]),        	#azul 
+	("Laranja", [17, 72, 245], [111, 164, 255]),    #laranja
+	("Amarelo", [59, 157, 201], [169, 237, 255]),  #amarelo
+	("Verde", [38, 103, 0], [202, 255, 155]),      #verde
+	("Vermelho", [7, 8, 176], [63, 60, 255]),     #vermelho
+	("Branco", [175, 140, 144], [255, 255, 255]),   #branco
+	("Azul", [144, 32, 0], [255, 142, 12]),        	#azul 
 ]
 
 # loop over the boundaries 

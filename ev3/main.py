@@ -5,7 +5,6 @@ from pybricks.parameters import Port, Direction
 
 from classes.braco  import Braco
 from classes.base   import Base
-from classes.sensor import Sensor
 
 # Create your objects here.
 ev3 = EV3Brick()
