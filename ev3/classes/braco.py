@@ -4,6 +4,7 @@ class Braco():
     # Construtor
     def __init__(self, motor):
         self.motor = motor
+        self.sentido = 1
         
     # Funções da clase
     def _segurarCubo(self):                                    #seria a posição inicial do braço, usa-se pra quando for girar ou segurar o cubo;

@@ -31,6 +31,15 @@ def giraBase180(direcao, estado):
         base._movEsquerda(estado)
         base._movEsquerda(estado)
 
+def giraBase180(direcao, estado):
+    if direcao == HORARIO:
+        base._movDireita(estado)
+        base._movDireita(estado)
+    
+    elif direcao == ANTIHORARIO:
+        base._movEsquerda(estado)
+        base._movEsquerda(estado)
+
 def giraCuboEixoX(direcao):
     # X
     if direcao == HORARIO:
@@ -49,7 +58,7 @@ def giraCuboEixoY(direcao):
         base._movDireita(SOLTO)
     
     elif direcao == ANTIHORARIO:
-        base._movEsquerda()
+        base._movEsquerda(SOLTO)
 
 def giraCuboEixoZ(direcao):
     # Z
@@ -69,18 +78,18 @@ def movimentaFace(direcao):
         braco._segurarCubo()
         base._movEsquerda(PRESO)
         braco._voltarPosicaoOriginal()
-        giraBase180(SOLTO)
+        giraBase180(HORARIO, SOLTO)
         braco.set_movimenta()
-        giraBase180(SOLTO)
+        giraBase180(HORARIO, SOLTO)
 
     elif direcao == ANTIHORARIO:
         braco.set_movimenta()
         braco._segurarCubo()
         base._movDireita(PRESO)
         braco._voltarPosicaoOriginal()
-        giraBase180(SOLTO)
+        giraBase180(ANTIHORARIO, SOLTO)
         braco.set_movimenta()
-        giraBase180(SOLTO)
+        giraBase180(ANTIHORARIO, SOLTO)
 
 def movimentaFaceTras(direcao):
     # B
@@ -109,44 +118,73 @@ def movimentaFaceFrente(direcao):
 def movimentaFaceDireita(direcao):
     # R
     if direcao == HORARIO:
-        giraBase180(SOLTO)
+        giraBase180(HORARIO,SOLTO)
         movimentaFace(HORARIO)
-        giraBase180(SOLTO)
+        giraBase180(HORARIO, SOLTO)
     
     elif direcao == ANTIHORARIO:
-        giraBase180(SOLTO)
+        giraBase180(ANTIHORARIO, SOLTO)
         movimentaFace(ANTIHORARIO)
-        giraBase180(SOLTO)
+        giraBase180(ANTIHORARIO, SOLTO)
 
 def movimentaFaceSuperior(direcao):
     # U
     if direcao == HORARIO:
         giraCuboEixoZ(ANTIHORARIO)
-        movimentaFace(HORARIO)
+        braco.set_movimenta()
+        braco._segurarCubo()
+        base._movEsquerda(PRESO)
+        braco._voltarPosicaoOriginal()
+        giraBase180(HORARIO, SOLTO)
+        braco.set_movimenta()
+        braco.set_movimenta()
+        giraBase180(HORARIO, SOLTO)
 
     elif direcao == ANTIHORARIO:
         giraCuboEixoZ(ANTIHORARIO)
-        movimentaFace(ANTIHORARIO)
+        braco.set_movimenta()
+        braco._segurarCubo()
+        base._movDireita(PRESO)
+        braco._voltarPosicaoOriginal()
+        giraBase180(HORARIO, SOLTO)
+        braco.set_movimenta()
+        braco.set_movimenta()
+        giraBase180(HORARIO, SOLTO)
 
 def movimentaFaceInferior(direcao):
     # D
     if direcao == HORARIO:
-        giraCuboEixoZ(HORARIO)
-        movimentaFace(HORARIO)
+        braco._segurarCubo()
+        base._movEsquerda(PRESO)
+        braco._voltarPosicaoOriginal()
     
     elif direcao == ANTIHORARIO:
-        giraCuboEixoZ(HORARIO)
-        movimentaFace(ANTIHORARIO)
+        braco._segurarCubo()
+        base._movDireita(PRESO)
+        braco._voltarPosicaoOriginal
 
 def movimentaMeridiano(direcao):
     # M
     if direcao == HORARIO:
         movimentaFace(ANTIHORARIO)
-        movimentaFaceDireita(HORARIO)
+        giraBase180(HORARIO,SOLTO)
+        braco.set_movimenta()
+        braco._segurarCubo()
+        base._movEsquerda(PRESO)
+        braco._voltarPosicaoOriginal()
+        base._movEsquerda(SOLTO)
+        braco.set_movimenta()
+        
 
     elif direcao == ANTIHORARIO:
         movimentaFace(HORARIO)
-        movimentaFaceDireita(ANTIHORARIO)
+        giraBase180(HORARIO,SOLTO)
+        braco.set_movimenta()
+        braco._segurarCubo()
+        base._movDireita(PRESO)
+        braco._voltarPosicaoOriginal()
+        base._movEsquerda(SOLTO)
+        braco.set_movimenta()
 
 def movimentaEquador(direcao):
     # E
@@ -171,3 +209,5 @@ def movimentaMeridianoY(direcao):
         base._movDireita(SOLTO)
         movimentaMeridiano(ANTIHORARIO)
         base._movEsquerda(SOLTO)
+        braco.set_movimenta()
+        braco.set_movimenta()
