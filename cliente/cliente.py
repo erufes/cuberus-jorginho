@@ -31,7 +31,7 @@ def ajustaIMG(rotate=False):
 
         # creating thumbnail
         image_rotated.save("fotos/adjusted/"+arquivo)
-        # os.remove("fotos/"+arquivo)
+        os.remove("fotos/"+arquivo)
 
 def scam_cubo(): 
     
@@ -61,9 +61,14 @@ def scam_cubo():
     movimenta("Braco")
     tirar_foto()
     
+    movimenta("Base-e")
+    movimenta("Braco")
+    movimenta("Base-e")
+    
 # Função para enviar dados para a URL de movimentação
 def movimenta(data):
     url = f"{ev3_server_url}/movimenta"
+    
     response = requests.post(url, data=data)
     return response.json()
 

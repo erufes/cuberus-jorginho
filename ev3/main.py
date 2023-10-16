@@ -36,6 +36,14 @@ def handle_movimenta(data):
         base.set_Direcao('d')
         base.set_movimenta()
         
+    elif data == "Base-e":
+        # Movimento Base
+        base =  Base(Motor(Port.B, Direction.CLOCKWISE, None), ev3)
+    
+        base.set_qtdMovimentos(1)
+        base.set_Direcao('e')
+        base.set_movimenta()
+        
     # Lógica para processar os dados de movimenta aqui
     return json.dumps(response_data)
 
