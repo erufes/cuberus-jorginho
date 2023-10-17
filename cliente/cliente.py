@@ -1,3 +1,4 @@
+from time import sleep
 import requests
 import configparser
 from PIL import Image 
@@ -5,11 +6,10 @@ import threading
 import os
 import shutil
 
-from rubik.cube             import Cube
-from rubik.solve            import Solver
+from rubik.cube     import Cube
+from rubik.solve    import Solver
 
-from classes.camera         import tirar_foto
-from classes.camera         import video
+from classes.camera         import camera
 from classes.recortaFace    import recortarall
 from classes.cor            import getCorCubo
 
@@ -36,32 +36,32 @@ def ajustaIMG(rotate=False, delete=False):
         if delete:
             os.remove("fotos/"+arquivo)
 
-def scam_cubo(url): 
+def scam_cubo(url, can): 
     
     # Face 1
-    tirar_foto()
+    can.tirar_foto()
         
     # Face 2
     movimenta("Braco", url)
-    tirar_foto()
+    can.tirar_foto()
     
     # Face 3
     movimenta("Braco", url)
-    tirar_foto()
+    can.tirar_foto()
     
     # Face 4
     movimenta("Braco", url)
-    tirar_foto()
+    can.tirar_foto()
    
     # Face 5
     movimenta("Base", url)
     movimenta("Braco", url)
-    tirar_foto()
+    can.tirar_foto()
     
     # Face 6
     movimenta("Braco", url)
     movimenta("Braco", url)
-    tirar_foto()
+    can.tirar_foto()
     
     movimenta("Base-e", url)
     movimenta("Braco", url)
@@ -76,7 +76,7 @@ def movimenta(data, url):
 # Função para enviar um os passos de solução do cubo para a URL de envio
 def enviar(data, url):
     url = str(url) + '/enviar'
-    response = requests.post(url, data=data)
+    response = requests.post(url, data=str(data))
     return response.json()
 
 # Exemplos de uso
@@ -86,12 +86,14 @@ if __name__ == "__main__":
     config.read("configuration/config_core.ini")
 
     ev3_server_url = config['CONFIGURATION']['host_EV3']  # Substitua pelo IP correto do seu EV3
+    can = camera()
     # Inicia camera
-    # cube_video = threading.Thread(target=video)
-    # cube_video.start()
+    cube_video = threading.Thread(target=can.video)
+    cube_video.start()
+    sleep(2)
     
     # Scaneia as faces
-    scam_cubo(ev3_server_url)
+    scam_cubo(ev3_server_url, can)
     
     # Ajusta tamanho das imagens
     ajustaIMG(rotate=config.getboolean('CONFIGURATION','rotate'),delete=config.getboolean('CONFIGURATION','apagar_image'))
@@ -110,7 +112,14 @@ if __name__ == "__main__":
         # Gera solução
         solver = Solver(c)
         solver.solve()
-    
-        response = enviar(solver.moves, ev3_server_url)
+
+        print(solver.moves)
+        for mov in solver.moves:
+            response = enviar(mov, ev3_server_url)
+            sleep(2)
+        # c.Zi()
+        # print(c)
+        # response = enviar("Zi", ev3_server_url)
+        
     except:
         print("problema na identificação de cores")

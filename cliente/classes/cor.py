@@ -4,12 +4,12 @@ import numpy as np
 import cv2
 
 boundaries = [
-    ([144, 32, 0], [255, 142, 9]),     # azul 
-    ([117, 220, 66], [202, 255, 155]),    # verde
+    ([144, 32, 0], [255, 207, 11]),     # azul 
+    ([60, 173, 36], [202, 255, 155]),    # verde
     
-	([17, 72, 245], [111, 164, 255]),   # laranja
+	([52, 100, 245], [108, 211, 255]),   # laranja
 	([59, 157, 201], [169, 255, 255]),  # amarelo
-	([7, 8, 176], [63, 60, 255]),       # vermelho
+	([7, 8, 176], [104, 107, 255]),       # vermelho
  
 	([175, 140, 144], [255, 255, 255]), # branco
 ]
@@ -26,15 +26,15 @@ lista = [
 ]
 
 listaCoordenadas = [                                              #LISTA DAS COORDENADAS DE CADA PARTE DO CUBO
-    [60, 30],          # coordenada 0,0      
-    [155, 32],          # coordenada 0,1      
-    [245, 37],          # coordenada 0,2      
-    [53, 85],           # coordenada 1,0      
-    [148, 94],          # coordenada 1,1           CENTRO
-    [248, 92],          # coordenada 1,2      
-    [52, 150],          # coordenada 2,0      
-    [144, 159],         # coordenada 2,1      
-    [243, 160],         # coordenada 2,2      
+    [58, 28],          # coordenada 0,0      
+    [155, 26],          # coordenada 0,1      
+    [239, 31],          # coordenada 0,2      
+    [53, 82],           # coordenada 1,0      
+    [146, 89],          # coordenada 1,1           CENTRO
+    [250, 91],          # coordenada 1,2      
+    [54, 158],          # coordenada 2,0      
+    [147, 160],         # coordenada 2,1      
+    [249, 166],         # coordenada 2,2      
 ]
 
 
@@ -111,4 +111,5 @@ def getCorCubo(debug = False):
         ordem_leitura.append(centro)
     
     cubo = ordena(cubo, ordem_leitura)
+    print(getSTRCubo(cubo, ordem_leitura))
     return getSTRCubo(cubo, ordem_leitura)

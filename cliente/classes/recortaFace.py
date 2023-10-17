@@ -9,10 +9,10 @@ os.makedirs(output_dir, exist_ok=True)
 
 # Define as cores e seus limites em HSV
 colors = {
-	"blue": ([144, 32, 0], [255, 142, 9]),        	#azul
-	"green": ([117, 220, 66], [202, 255, 155]),      #verde
+	"blue": ([144, 32, 0], [255, 206, 10]),        	#azul
+	"green": ([60, 173, 36], [202, 255, 155]),      #verde
  
-	"orange": ([17, 72, 245], [111, 164, 255]),     #laranja
+	"orange": ([17, 72, 245], [111, 199, 255]),     #laranja
 	"yellow": ([59, 157, 201], [169, 255, 255]),   #amarelo
 	"red": ([7, 8, 176], [63, 60, 255]),          #vermelho
  
@@ -34,8 +34,8 @@ def identify_colors(image):
             approx = cv2.approxPolyDP(contour, 0, False)
             x, y, w, h = cv2.boundingRect(approx)
             if w > 50 and h > 50 :
-                if x > 25 and y > 30:
-                    if x+w <= image.shape[1]-45 and y+h <= image.shape[0]-87:
+                if x > 30 and y > 60:
+                    if x+w <= image.shape[1]-75 and y+h <= image.shape[0]-50:
                         identified_rectangles.append((x, y, w+x, h+y))
                         
                         # print(x, y, w+x, h+y)
@@ -127,7 +127,7 @@ def filter_rectangles(rectangles, distance_threshold=10):
 def recortarall(debug = False):
     # Redimensione todas as imagens para a mesma largura e altura
     margin = 0  # Margem em pixels
-    distance_threshold = 10  # Limite de distância para filtrar retângulos
+    distance_threshold = 50  # Limite de distância para filtrar retângulos
 
     for num in range(1, 7):
         # Carregue a imagem
@@ -146,7 +146,10 @@ def recortarall(debug = False):
             cv2.rectangle(rect, (x, y), (w, h), (0, 255, 0), 2)
 
         # Filtrar retângulos com base na distância média
-        filtered_rectangles = filter_rectangles(rectangles, distance_threshold)
+        if len(rectangles) == 1:
+            filtered_rectangles = rectangles
+        else:
+            filtered_rectangles = filter_rectangles(rectangles, distance_threshold)
         
         rect2 = original_image.copy()
         for (x, y, w, h) in filtered_rectangles:
