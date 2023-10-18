@@ -87,13 +87,16 @@ if __name__ == "__main__":
 
     ev3_server_url = config['CONFIGURATION']['host_EV3']  # Substitua pelo IP correto do seu EV3
     can = camera()
+    # can.video()
     # Inicia camera
-    cube_video = threading.Thread(target=can.video)
-    cube_video.start()
-    sleep(2)
+    # cube_video = threading.Thread(target=can.video)
+    # cube_video.start()
+    # sleep(2)
     
-    # Scaneia as faces
-    scam_cubo(ev3_server_url, can)
+    # # Scaneia as faces
+    # scam_cubo(ev3_server_url, can)
+    
+    # can.free()
     
     # Ajusta tamanho das imagens
     ajustaIMG(rotate=config.getboolean('CONFIGURATION','rotate'),delete=config.getboolean('CONFIGURATION','apagar_image'))
@@ -113,13 +116,13 @@ if __name__ == "__main__":
         solver = Solver(c)
         solver.solve()
 
-        print(solver.moves)
         for mov in solver.moves:
+            print(mov)
             response = enviar(mov, ev3_server_url)
-            sleep(2)
+            # input()
         # c.Zi()
         # print(c)
-        # response = enviar("Zi", ev3_server_url)
+        # response = enviar("E", ev3_server_url)
         
     except:
         print("problema na identificação de cores")

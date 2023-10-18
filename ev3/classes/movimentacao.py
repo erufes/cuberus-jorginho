@@ -161,7 +161,7 @@ def movimentaFaceInferior(direcao):
     elif direcao == ANTIHORARIO:
         braco._segurarCubo()
         base._movDireita(PRESO)
-        braco._voltarPosicaoOriginal
+        braco._voltarPosicaoOriginal()
 
 def movimentaMeridiano(direcao):
     # M
@@ -189,14 +189,30 @@ def movimentaMeridiano(direcao):
 def movimentaEquador(direcao):
     # E
     if direcao == HORARIO:
-        giraCuboEixoZ(HORARIO)
-        movimentaMeridiano(HORARIO)
-        giraCuboEixoZ(ANTIHORARIO)
+        braco._segurarCubo()
+        base._movDireita(PRESO)
+        braco._voltarPosicaoOriginal()
+        braco.set_movimenta()
+        braco.set_movimenta()
+        braco._segurarCubo()
+        base._movEsquerda(PRESO)
+        braco._voltarPosicaoOriginal()
+        base._movDireita(SOLTO)
+        braco.set_movimenta()
+        braco.set_movimenta()
 
     elif direcao == ANTIHORARIO:
-        giraCuboEixoZ(HORARIO)
-        movimentaMeridiano(ANTIHORARIO)
-        giraCuboEixoZ(ANTIHORARIO)
+        braco._segurarCubo()
+        base._movEsquerda(PRESO)
+        braco._voltarPosicaoOriginal()
+        braco.set_movimenta()
+        braco.set_movimenta()
+        braco._segurarCubo()
+        base._movDireita(PRESO)
+        braco._voltarPosicaoOriginal()
+        base._movEsquerda(SOLTO)
+        braco.set_movimenta()
+        braco.set_movimenta()
 
 def movimentaMeridianoY(direcao):
     # S
