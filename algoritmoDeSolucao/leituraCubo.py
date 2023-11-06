@@ -6,12 +6,12 @@ from cubos import *
 #Este programa serve para traduzir o json com a configuração do cubo
 #de uma forma que seja legível para a lib, visando a resolução do 
 #quebra-cabeça.
-#A orientação do cubo deve ser com o amarelo em cima e o azul como o centro do eixo Z;
-
+#A orientação do cubo deve ser com o amarelo como +Z, o azul como +X e o vermelho como +Y;
+def leArquivo (arquivo):
     #Colocar o nome do .json com o arquivo desejado;
-with open ("cubos/cuboConfigEx1.json") as file:
-    data = json.load(file)
-
+    with open (arquivo) as file:
+        return json.load(file)
+data = leArquivo()
 #Define a ordem das cores lidas pela lib;
 ordemMeio = ["Laranja", "Azul", "Vermelho", "Verde"]
 
@@ -50,5 +50,4 @@ def leCubo ():
 
     return config
 
-print("Configuracao: %s\n" % str(leCubo()))
 resolveCubo(str(leCubo()))
