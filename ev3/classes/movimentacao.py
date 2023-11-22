@@ -15,152 +15,99 @@ ev3 = EV3Brick()
 
 braco =  Braco(Motor(Port.A, Direction.CLOCKWISE, None))
 base =  Base(Motor(Port.B, Direction.CLOCKWISE, None), ev3)
-
-def verificaMovimento (movimento):
-    if len(movimento) == 1:
-        return HORARIO
-    elif len(movimento) == 2:
-        return ANTIHORARIO
     
 def giraBase180(direcao, estado):
-    if direcao == HORARIO:
-        base._movDireita(estado)
-        base._movDireita(estado)
+    sentido = ""
+    est     = "S"
     
-    elif direcao == ANTIHORARIO:
-        base._movEsquerda(estado)
-        base._movEsquerda(estado)
-
-def giraBase180(direcao, estado):
-    if direcao == HORARIO:
-        base._movDireita(estado)
-        base._movDireita(estado)
-    
-    elif direcao == ANTIHORARIO:
-        base._movEsquerda(estado)
-        base._movEsquerda(estado)
+    if direcao  == ANTIHORARIO:
+        sentido = "i"
+    if estado   == PRESO:
+        est     = "P"
+        
+    return [sentido+est+"H",sentido+est+"H"]
 
 def giraCuboEixoX(direcao):
+    sentido1 = ""
+    sentido2 = ""
+    
     # X
     if direcao == HORARIO:
-        base._movEsquerda(SOLTO)
-        braco.set_movimenta()
-        base._movDireita(SOLTO)
-    
+        sentido1 = "i"
     elif direcao == ANTIHORARIO:
-        base._movDireita(SOLTO)
-        braco.set_movimenta()
-        base._movEsquerda(SOLTO)
+        sentido2 = "i"
+        
+    return [sentido1+"SH", "V", sentido2+"SH"]
         
 def giraCuboEixoY(direcao):
+    sentido = ""
     # Y
-    if direcao == HORARIO:
-        base._movDireita(SOLTO)
-    
-    elif direcao == ANTIHORARIO:
-        base._movEsquerda(SOLTO)
+    if direcao == ANTIHORARIO:
+        sentido = "i"
+        
+    return [sentido+"SH"]
 
 def giraCuboEixoZ(direcao):
+    mov = []
     # Z
     if direcao == HORARIO:
-        giraBase180(HORARIO, SOLTO)
-        braco.set_movimenta()
-        giraBase180(HORARIO, SOLTO)
+        mov += giraBase180(HORARIO, SOLTO)
+        mov += ["V"]
+        mov += giraBase180(HORARIO, SOLTO)
 
     elif direcao == ANTIHORARIO:
-        braco.set_movimenta()
+        mov += ["V"]
+    
+    return mov
 
 def movimentaFace(direcao):
-    #face esquerda
+    sentido = ""
+    
+    # face esquerda
     # L
-    if direcao == HORARIO:
-        braco.set_movimenta()
-        braco._segurarCubo()
-        base._movEsquerda(PRESO)
-        braco._voltarPosicaoOriginal()
-        giraBase180(HORARIO, SOLTO)
-        braco.set_movimenta()
-        giraBase180(HORARIO, SOLTO)
-
-    elif direcao == ANTIHORARIO:
-        braco.set_movimenta()
-        braco._segurarCubo()
-        base._movDireita(PRESO)
-        braco._voltarPosicaoOriginal()
-        giraBase180(ANTIHORARIO, SOLTO)
-        braco.set_movimenta()
-        giraBase180(ANTIHORARIO, SOLTO)
-
+    if direcao == ANTIHORARIO:
+        sentido = "i"
+    
+    mov = ["V", "PV", sentido+"PH", "SV"] + giraBase180(direcao, SOLTO) + ["V"] + giraBase180(direcao, SOLTO)
+    return mov
+        
 def movimentaFaceTras(direcao):
     # B
-    if direcao == HORARIO:
-        base._movEsquerda(SOLTO)
-        movimentaFace(HORARIO)
-        base._movDireita(SOLTO)
-    
-    elif direcao == ANTIHORARIO:
-        base._movEsquerda(SOLTO)
-        movimentaFace(ANTIHORARIO)
-        base._movDireita(SOLTO)
+    mov = ["iSH"] + movimentaFace(direcao) + ["SH"]
+    return mov
 
 def movimentaFaceFrente(direcao):
-    # F
-    if direcao == HORARIO:
-        base._movDireita(SOLTO)
-        movimentaFace(HORARIO)
-        base._movEsquerda(SOLTO)
-    
-    elif direcao == ANTIHORARIO:
-        base._movDireita(SOLTO)
-        movimentaFace(ANTIHORARIO)
-        base._movEsquerda(SOLTO)
+    # F    
+    mov = ["SH"] + movimentaFace(direcao) + ["iSH"]
+    return mov
 
 def movimentaFaceDireita(direcao):
     # R
-    if direcao == HORARIO:
-        giraBase180(HORARIO,SOLTO)
-        movimentaFace(HORARIO)
-        giraBase180(HORARIO, SOLTO)
-    
-    elif direcao == ANTIHORARIO:
-        giraBase180(ANTIHORARIO, SOLTO)
-        movimentaFace(ANTIHORARIO)
-        giraBase180(ANTIHORARIO, SOLTO)
+    mov = giraBase180(direcao,SOLTO) + movimentaFace(direcao) + giraBase180(direcao, SOLTO)
+    return mov
 
 def movimentaFaceSuperior(direcao):
     # U
-    if direcao == HORARIO:
-        giraCuboEixoZ(ANTIHORARIO)
-        braco.set_movimenta()
-        braco._segurarCubo()
-        base._movEsquerda(PRESO)
-        braco._voltarPosicaoOriginal()
-        giraBase180(HORARIO, SOLTO)
-        braco.set_movimenta()
-        braco.set_movimenta()
-        giraBase180(HORARIO, SOLTO)
-
-    elif direcao == ANTIHORARIO:
-        giraCuboEixoZ(ANTIHORARIO)
-        braco.set_movimenta()
-        braco._segurarCubo()
-        base._movDireita(PRESO)
-        braco._voltarPosicaoOriginal()
-        giraBase180(HORARIO, SOLTO)
-        braco.set_movimenta()
-        braco.set_movimenta()
-        giraBase180(HORARIO, SOLTO)
+    mov = giraCuboEixoZ(ANTIHORARIO) + ["V", "PV"]
+    
+    sentido = ""
+    if direcao == ANTIHORARIO:
+        sentido = "i"
+        
+    mov += [sentido + "PH", "SV"] + giraBase180(HORARIO, SOLTO) + ["V", "V"] + giraBase180(HORARIO, SOLTO)
+    
+    return mov
 
 def movimentaFaceInferior(direcao):
     # D
     if direcao == HORARIO:
         braco._segurarCubo()
-        base._movEsquerda(PRESO)
+        base._movAntHorario(PRESO)
         braco._voltarPosicaoOriginal()
     
     elif direcao == ANTIHORARIO:
         braco._segurarCubo()
-        base._movDireita(PRESO)
+        base._movHorario(PRESO)
         braco._voltarPosicaoOriginal()
 
 def movimentaMeridiano(direcao):
@@ -170,9 +117,9 @@ def movimentaMeridiano(direcao):
         giraBase180(HORARIO,SOLTO)
         braco.set_movimenta()
         braco._segurarCubo()
-        base._movEsquerda(PRESO)
+        base._movAntHorario(PRESO)
         braco._voltarPosicaoOriginal()
-        base._movEsquerda(SOLTO)
+        base._movAntHorario(SOLTO)
         braco.set_movimenta()
         
 
@@ -181,49 +128,49 @@ def movimentaMeridiano(direcao):
         giraBase180(HORARIO,SOLTO)
         braco.set_movimenta()
         braco._segurarCubo()
-        base._movDireita(PRESO)
+        base._movHorario(PRESO)
         braco._voltarPosicaoOriginal()
-        base._movEsquerda(SOLTO)
+        base._movAntHorario(SOLTO)
         braco.set_movimenta()
 
 def movimentaEquador(direcao):
     # E
     if direcao == HORARIO:
         braco._segurarCubo()
-        base._movDireita(PRESO)
+        base._movHorario(PRESO)
         braco._voltarPosicaoOriginal()
         braco.set_movimenta()
         braco.set_movimenta()
         braco._segurarCubo()
-        base._movEsquerda(PRESO)
+        base._movAntHorario(PRESO)
         braco._voltarPosicaoOriginal()
-        base._movDireita(SOLTO)
+        base._movHorario(SOLTO)
         braco.set_movimenta()
         braco.set_movimenta()
 
     elif direcao == ANTIHORARIO:
         braco._segurarCubo()
-        base._movEsquerda(PRESO)
+        base._movAntHorario(PRESO)
         braco._voltarPosicaoOriginal()
         braco.set_movimenta()
         braco.set_movimenta()
         braco._segurarCubo()
-        base._movDireita(PRESO)
+        base._movHorario(PRESO)
         braco._voltarPosicaoOriginal()
-        base._movEsquerda(SOLTO)
+        base._movAntHorario(SOLTO)
         braco.set_movimenta()
         braco.set_movimenta()
 
 def movimentaMeridianoY(direcao):
     # S
     if direcao == HORARIO:
-        base._movDireita(SOLTO)
+        base._movHorario(SOLTO)
         movimentaMeridiano(HORARIO)
-        base._movEsquerda(SOLTO)
+        base._movAntHorario(SOLTO)
     
     elif direcao == ANTIHORARIO:
-        base._movDireita(SOLTO)
+        base._movHorario(SOLTO)
         movimentaMeridiano(ANTIHORARIO)
-        base._movEsquerda(SOLTO)
+        base._movAntHorario(SOLTO)
         braco.set_movimenta()
         braco.set_movimenta()

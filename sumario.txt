@@ -1,0 +1,14 @@
+V - Vertival 	- Braço
+H - Horizontal	- Base
+
+S - Solto
+P - Preso
+
+i - Sentido  Anti-Horario
+  - Sentido Horario
+
+"V"  - braco.set_movimenta()
+"SV" - _voltarPosicaoOriginal()
+"PV" - braco._segurarCubo()
+    
+    

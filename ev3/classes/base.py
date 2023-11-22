@@ -17,14 +17,14 @@ class Base():
         self.motor.run_angle(2000, 15 * self.qtd, Stop.HOLD, True)
         self.motor.run_angle(2000, -15 * self.qtd, Stop.HOLD, True)
         
-    def _movEsquerda(self, preso=False):
+    def _movHorario(self, preso=False):
         if preso == False:
             self.motor.run_angle(1000, -270 * self.qtd, Stop.HOLD, True)
         else:
             self.motor.run_angle(1000, -270 * self.qtd, Stop.HOLD, True)
             
 
-    def _movDireita(self, preso=False):
+    def _movAntHorario(self, preso=False):
         if preso == False:
             self.motor.run_angle(1000, 270 * self.qtd, Stop.HOLD, True)
         else:
@@ -39,7 +39,7 @@ class Base():
         
     def set_movimenta(self):
         if self.direcao == 'e': 
-            self._movEsquerda()
+            self._movAntHorario()
         else:
             if self.direcao == 'd':
-                self._movDireita()
+                self._movHorario()

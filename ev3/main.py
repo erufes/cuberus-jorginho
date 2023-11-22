@@ -50,8 +50,8 @@ def handle_movimenta(data):
     return json.dumps(response_data)
 
 def handle_enviar(data):
-    # Função para lidar com a rota /enviar
-    func = { # dicionario de funções de movimento
+    # mpeando funções
+    func = {
         "X":giraCuboEixoX,
         "Y":giraCuboEixoY,
         "Z":giraCuboEixoZ,
