@@ -1,3 +1,4 @@
+from operator import xor
 from time import sleep
 import requests
 import configparser
@@ -12,6 +13,8 @@ from rubik.solve    import Solver
 from classes.camera         import camera
 from classes.recortaFace    import recortarall
 from classes.cor            import getCorCubo
+
+from classes.movimentacao import *
 
 def ajustaIMG(rotate=False, delete=False):
     for i in range(6):
@@ -74,11 +77,62 @@ def movimenta(data, url):
     return response.json()
 
 # Função para enviar um os passos de solução do cubo para a URL de envio
-def enviar(data, url):
-    url = str(url) + '/enviar'
-    response = requests.post(url, data=str(data))
-    return response.json()
+# def enviar(data, url):
+#     url = str(url) + '/enviar'
+#     response = requests.post(url, data=str(data))
+#     return response.json()
 
+def traduz(dates):
+    # mapeando funções
+    func = {
+        "X":giraCuboEixoX,
+        "Y":giraCuboEixoY,
+        "Z":giraCuboEixoZ,
+        "L":movimentaFace,
+        "B":movimentaFaceTras,
+        "F":movimentaFaceFrente,
+        "R":movimentaFaceDireita,
+        "U":movimentaFaceSuperior,
+        "D":movimentaFaceInferior,
+        "M":movimentaMeridiano,
+        "E":movimentaEquador,
+        "S":movimentaMeridianoY,
+    }
+    
+    movs = []
+    for date in dates:
+        direcao = 'Horario'
+        
+        if "i" in date:
+            date = date[0]
+            direcao = 'Antihorario'
+        movs += func[date](direcao)
+    return movs
+
+def filtra(lista):
+    filtrar_novamente = False
+    
+    i = 0
+    while i < len(lista)-4:
+        if lista[i:i+4] == [lista[i]] * 4:
+            lista[i:i+4] = []
+            i -= 1
+            filtrar_novamente = True
+        i += 1
+    
+    i = 0
+    while i < len(lista)-1:
+        if ('i' in lista[i]) != ('i' in lista[i+1]) and lista[i].replace('i', '') == lista[i+1].replace('i', ''):
+            lista[i:i+2] = []
+            i -= 1
+            filtrar_novamente = True
+        i += 1
+    
+    if filtrar_novamente:
+        return filtra(lista)
+    
+    return lista
+        
 # Exemplos de uso
 if __name__ == "__main__":
     # URL do servidor no EV3
@@ -116,9 +170,20 @@ if __name__ == "__main__":
         solver = Solver(c)
         solver.solve()
 
-        for mov in solver.moves:
-            print(mov)
-            response = enviar(mov, ev3_server_url)
+        movs = solver.moves
+        
+        
+        traducao = traduz(solver.moves)
+        antes = len(traducao)
+        filt = filtra(traducao)
+        print(f"filtrados - {antes - len(filt)}")
+        
+        print(filt)
+        # print(filt)
+        
+        # for mov in solver.moves:
+        #     print(mov)
+        #     response = enviar(mov, ev3_server_url)
             # input()
         # c.Zi()
         # print(c)
@@ -126,3 +191,4 @@ if __name__ == "__main__":
         
     except:
         print("problema na identificação de cores")
+        

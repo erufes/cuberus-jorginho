@@ -1,21 +1,9 @@
 #!/usr/bin/env pybricks-micropython
-from pybricks.hubs import EV3Brick
-from pybricks.ev3devices import Motor
-from pybricks.parameters import Port, Direction
-
-from classes.braco  import Braco
-from classes.base   import Base
-
 PRESO = True
 SOLTO = False
 HORARIO = 'Horario'
 ANTIHORARIO = 'Antihorario'
 
-ev3 = EV3Brick()
-
-braco =  Braco(Motor(Port.A, Direction.CLOCKWISE, None))
-base =  Base(Motor(Port.B, Direction.CLOCKWISE, None), ev3)
-    
 def giraBase180(direcao, estado):
     sentido = ""
     est     = "S"

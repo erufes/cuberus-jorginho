@@ -50,7 +50,7 @@ def handle_movimenta(data):
     return json.dumps(response_data)
 
 def handle_enviar(data):
-    # mpeando funções
+    # mapeando funções
     func = {
         "X":giraCuboEixoX,
         "Y":giraCuboEixoY,
