@@ -23,9 +23,18 @@ O Cuberus se trata de um robô que resolve cubo mágico. Construído com peças 
 do cubo mágico e resolvê-lo.
 
 ## ❓ O que é...
-### Kit Lego Education
+### Lego MindStorms Education Ev3
+Se trata de um kit de robótica de terceira geração da linha Mindstorms da LEGO. É o sucessor da segunda geração do kit LEGO Mindstorms NXT. Foi idealizado pela Lego com o objetivo de instigar a robótica a partir dos 
+seus blocos e peças de construção, permitindo criar diversas estruturas para robôs. Além disso, o kit conta com uma variedade de componentes (sensor de cor, motor, sensor ultrassônico...) para serem usados junto com 
+o Lego MindStorms Ev3 P-Brick.
+
+### Lego MindStorms EV3 P-Brick
+Este tijolo programável serve como o coração e o cérebro dos robôs Lego MindStorms Education Ev3. Possui um iluminado botão que muda de cor para indicar o estado ativo do tijolo, contém com um processador ARM9, suporta USB, 
+comunicação Bluetooth e Wi-Fi com um computador e tem uma interface de programação que permite a programação e o registro de dados diretamente sobre o tijolo. Nele, conectamos os motores e sensores do robô, sendo assim 
+possível realizar suas funções.
 
 ### Ev3 dev
+
 
 ### Cubo mágico
 
