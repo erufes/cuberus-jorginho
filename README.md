@@ -50,6 +50,8 @@ montado de forma que as faces possuam todas as partes de mesma cor. Foi inventad
 
 ### Resolução do cubo
 
+## 📚 Libs Usadas
+
 ## 📌 Pré-requisitos
 
 `pip install opencv-python`
