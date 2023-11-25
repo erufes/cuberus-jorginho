@@ -70,6 +70,8 @@ montado de forma que as faces possuam todas as partes de mesma cor. Foi inventad
 
 `pip install opencv-python`
 
+## 👥 Contribuidores
+
 ## 👨‍💻 Desenvolvedores
 | [<img loading="lazy" src="https://avatars.githubusercontent.com/u/56831082?v=4" width=115><br><sub>Arthur Coelho Estevão</sub>](https://github.com/arthurcoelho442) | [<img loading="lazy" src="https://avatars.githubusercontent.com/u/136736744?v=4" width=115><br><sub>Diana Mello Rosi</sub>](https://github.com/dianamross) | [<img loading="lazy" src="https://avatars.githubusercontent.com/u/136653897?v=4" width=115><br><sub>Elisa Muller Sarmento</sub>](https://github.com/BeWSM) | [<img loading="lazy" src="https://avatars.githubusercontent.com/u/91852564?v=4" width=115><br><sub>Luiz Gabriel Figueiredo</sub>](https://github.com/LGFigueiredoC) |
 | :---: | :---: | :---: | :---: |
