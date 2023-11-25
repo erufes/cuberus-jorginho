@@ -28,10 +28,14 @@ Se trata de um kit de robótica de terceira geração da linha Mindstorms da LEG
 seus blocos e peças de construção, permitindo criar diversas estruturas para robôs. Além disso, o kit conta com uma variedade de componentes (sensor de cor, motor, sensor ultrassônico...) para serem usados junto com 
 o Lego MindStorms Ev3 P-Brick.
 
+<img loading="lazy" src="https://github.com/erufes/cuberus-jorginho/blob/main/to_readme/imagens/kitLegoEdu.jpg" width="100"  height="100"/> 
+
 ### Lego MindStorms EV3 P-Brick
 Este tijolo programável serve como o coração e o cérebro dos robôs Lego MindStorms Education Ev3. Possui um iluminado botão que muda de cor para indicar o estado ativo do tijolo, contém com um processador ARM9, suporta USB, 
 comunicação Bluetooth e Wi-Fi com um computador e tem uma interface de programação que permite a programação e o registro de dados diretamente sobre o tijolo. Nele, conectamos os motores e sensores do robô, sendo assim 
 possível realizar suas funções.
+
+<img loading="lazy" src="https://github.com/erufes/cuberus-jorginho/blob/main/to_readme/imagens/ev3.jpeg" width="453"  height="553"/> 
 
 ### Ev3 dev
 É um sistema operacional baseado no Debian Linux, que é executável em diversas plataformas Lego MindStorms compatíveis, incluindo o Lego MindStorms Ev3. É uma estrutura de driver de baixo nível para controlar sensores e motores
