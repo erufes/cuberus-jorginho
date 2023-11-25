@@ -23,7 +23,7 @@ O Cuberus se trata de um robô que resolve cubo mágico. Construído com peças 
 calcular o algoritmo para a resolução do cubo mágico e resolvê-lo.
 
 <img loading="lazy" src="https://github.com/erufes/cuberus-jorginho/blob/main/to_readme/imagens/cuberusAtual.jpg" width="300"  height="300"/> 
-Imagens atuais do Jorginho 1.2 do Cuberus
+#### Imagens atuais do Jorginho 1.2 do Cuberus
 
 ## ❓ O que é...
 ### Lego MindStorms Education Ev3
