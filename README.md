@@ -60,7 +60,7 @@ montado de forma que as faces possuam todas as partes de mesma cor. Foi inventad
 
 ## 📚 Libs Usadas
 
-## ⏲️ Versão Anterior
+## ⌛ Versão Anterior
 
 ## 📌 Pré-requisitos
 
