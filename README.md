@@ -22,6 +22,8 @@
 O Cuberus se trata de um robô que resolve cubo mágico. Construído com peças do Kit Lego MindStorms Education Ev3 e usando o Lego MindStorms Ev3 P-Brick, ele é capaz de identificar as cores das 6 faces do cubo, 
 calcular o algoritmo para a resolução do cubo mágico e resolvê-lo.
 
+<img loading="lazy" src="https://github.com/erufes/cuberus-jorginho/blob/main/to_readme/imagens/cuberusAtual.jpg" width="200"  height="200"/> 
+
 ## ❓ O que é...
 ### Lego MindStorms Education Ev3
 Se trata de um kit de robótica de terceira geração da linha Mindstorms da LEGO. É o sucessor da segunda geração do kit LEGO Mindstorms NXT. Foi idealizado pela Lego com o objetivo de instigar a robótica a partir dos 
@@ -59,6 +61,7 @@ montado de forma que as faces possuam todas as partes de mesma cor. Foi inventad
 ### Resolução do cubo
 
 ## 📚 Libs Usadas
+### Open CV
 
 ## ⌛ Versão Anterior
 
