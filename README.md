@@ -41,6 +41,8 @@ possível realizar suas funções.
 É um sistema operacional baseado no Debian Linux, que é executável em diversas plataformas Lego MindStorms compatíveis, incluindo o Lego MindStorms Ev3. É uma estrutura de driver de baixo nível para controlar sensores e motores
 da Lego MindStorms. Suporta várias linguagens de programação, como por exemplo Pyhon. 
 
+<img loading="lazy" src="https://github.com/erufes/cuberus-jorginho/blob/main/to_readme/imagens/ev3Dev.png" width="300"  height="208,68"/> 
+
 ### Cubo mágico
 Também conhecido como Cubo de Rubik, é um quebra-cabeça tridimensional composto de 6 faces de cores diferentes divididas cada uma em 9 partes de tamanhos iguais. As linhas e colunas devem ser giradas para que o cubo seja 
 montado de forma que as faces possuam todas as partes de mesma cor. Foi inventado pelo professor de arquitetura húngaro Ernő Rubik em 1974. 
