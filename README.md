@@ -47,7 +47,7 @@ da Lego MindStorms. Suporta várias linguagens de programação, como por exempl
 Também conhecido como Cubo de Rubik, é um quebra-cabeça tridimensional composto de 6 faces de cores diferentes divididas cada uma em 9 partes de tamanhos iguais. As linhas e colunas devem ser giradas para que o cubo seja 
 montado de forma que as faces possuam todas as partes de mesma cor. Foi inventado pelo professor de arquitetura húngaro Ernő Rubik em 1974. 
 
-<img loading="lazy" src="https://github.com/erufes/cuberus-jorginho/blob/main/to_readme/imagens/cuboMagicoLogo.jpg" width="250"  height="250"/> 
+<img loading="lazy" src="https://github.com/erufes/cuberus-jorginho/blob/main/to_readme/imagens/cuboMagicoLogo.jpg" width="200"  height="200"/> 
 
 ## 👾 Funcionamento
 ### Ev3 dev
