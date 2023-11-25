@@ -28,7 +28,7 @@ Se trata de um kit de robótica de terceira geração da linha Mindstorms da LEG
 seus blocos e peças de construção, permitindo criar diversas estruturas para robôs. Além disso, o kit conta com uma variedade de componentes (sensor de cor, motor, sensor ultrassônico...) para serem usados junto com 
 o Lego MindStorms Ev3 P-Brick.
 
-<img loading="lazy" src="https://github.com/erufes/cuberus-jorginho/blob/main/to_readme/imagens/kitLegoEdu.jpg" width="200"  height="200"/> 
+<img loading="lazy" src="https://github.com/erufes/cuberus-jorginho/blob/main/to_readme/imagens/kitLegoEdu.jpg" width="300"  height="300"/> 
 
 ### Lego MindStorms EV3 P-Brick
 Este tijolo programável serve como o coração e o cérebro dos robôs Lego MindStorms Education Ev3. Possui um iluminado botão que muda de cor para indicar o estado ativo do tijolo, contém com um processador ARM9, suporta USB, 
