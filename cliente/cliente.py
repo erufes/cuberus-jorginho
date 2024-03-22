@@ -1,18 +1,21 @@
-from operator import xor
-from time import sleep
-import requests
+# Importe de configurações
 import configparser
-from PIL import Image 
-import threading
-import os
-import shutil
 
-from rubik.cube     import Cube
-from rubik.solve    import Solver
+# from operator import xor
+# from time import sleep
+# import requests
+# from PIL import Image 
+# import threading
+# import os
+# import shutil
 
+# from rubik.cube     import Cube
+# from rubik.solve    import Solver
+# from classes.recortaFace    import recortarall
+# from classes.cor            import getCorCubo
+
+# Camera
 from classes.camera         import camera
-from classes.recortaFace    import recortarall
-from classes.cor            import getCorCubo
 
 from classes.movimentacao import *
 
@@ -138,57 +141,61 @@ if __name__ == "__main__":
     # URL do servidor no EV3
     config = configparser.RawConfigParser()
     config.read("configuration/config_core.ini")
+    
+    ev3_server_url = config['CONFIGURATION']['host_EV3']
+    
+    print(ev3_server_url)
 
-    ev3_server_url = config['CONFIGURATION']['host_EV3']  # Substitua pelo IP correto do seu EV3
     can = camera()
-    # can.video()
-    # Inicia camera
-    # cube_video = threading.Thread(target=can.video)
-    # cube_video.start()
-    # sleep(2)
+    can.video()
     
-    # # Scaneia as faces
-    # scam_cubo(ev3_server_url, can)
+    # # Inicia camera
+    # # cube_video = threading.Thread(target=can.video)
+    # # cube_video.start()
+    # # sleep(2)
     
-    # can.free()
+    # # # Scaneia as faces
+    # # scam_cubo(ev3_server_url, can)
     
-    # Ajusta tamanho das imagens
-    ajustaIMG(rotate=config.getboolean('CONFIGURATION','rotate'),delete=config.getboolean('CONFIGURATION','apagar_image'))
+    # # can.free()
     
-    recortarall(debug=config.getboolean('CONFIGURATION','debug_recort'))
+    # # Ajusta tamanho das imagens
+    # ajustaIMG(rotate=config.getboolean('CONFIGURATION','rotate'),delete=config.getboolean('CONFIGURATION','apagar_image'))
     
-    try:
-        # Busca cores           
-        c = Cube(getCorCubo())
-        print(c)
+    # recortarall(debug=config.getboolean('CONFIGURATION','debug_recort'))
+    
+    # try:
+    #     # Busca cores           
+    #     c = Cube(getCorCubo())
+    #     print(c)
         
-        if config.getboolean('CONFIGURATION','apagar_image'):
-            shutil.rmtree("fotos/adjusted")
-            shutil.rmtree("fotos/recortados")
+    #     if config.getboolean('CONFIGURATION','apagar_image'):
+    #         shutil.rmtree("fotos/adjusted")
+    #         shutil.rmtree("fotos/recortados")
         
-        # Gera solução
-        solver = Solver(c)
-        solver.solve()
+    #     # Gera solução
+    #     solver = Solver(c)
+    #     solver.solve()
 
-        movs = solver.moves
+    #     movs = solver.moves
         
         
-        traducao = traduz(solver.moves)
-        antes = len(traducao)
-        filt = filtra(traducao)
-        print(f"filtrados - {antes - len(filt)}")
+    #     traducao = traduz(solver.moves)
+    #     antes = len(traducao)
+    #     filt = filtra(traducao)
+    #     print(f"filtrados - {antes - len(filt)}")
         
-        print(filt)
-        # print(filt)
+    #     print(filt)
+    #     # print(filt)
         
-        # for mov in solver.moves:
-        #     print(mov)
-        #     response = enviar(mov, ev3_server_url)
-            # input()
-        # c.Zi()
-        # print(c)
-        # response = enviar("E", ev3_server_url)
+    #     # for mov in solver.moves:
+    #     #     print(mov)
+    #     #     response = enviar(mov, ev3_server_url)
+    #         # input()
+    #     # c.Zi()
+    #     # print(c)
+    #     # response = enviar("E", ev3_server_url)
         
-    except:
-        print("problema na identificação de cores")
+    # except:
+    #     print("problema na identificação de cores")
         

@@ -26,9 +26,10 @@ calcular o algoritmo para a resolução do cubo mágico e resolvê-lo.
 
 <div align="center">
 	<img src="to_readme/imagens/cuberusAtual.jpg" width="300">
+
+**Imagens atuais do Jorginho 1.2 do Cuberus**
 </div>
 
-Imagens atuais do Jorginho 1.2 do Cuberus
 
 ## ❓ O que é...
 ### Lego MindStorms Education Ev3
