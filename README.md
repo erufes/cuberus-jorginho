@@ -1,3 +1,5 @@
+<div  Align="justify">
+
 <h1 align= "center"> 🎲 Cuberus 🤖 </h1>
 
 
@@ -22,7 +24,10 @@
 O Cuberus se trata de um robô que resolve cubo mágico. Construído com peças do Kit Lego MindStorms Education Ev3 e usando o Lego MindStorms Ev3 P-Brick, ele é capaz de identificar as cores das 6 faces do cubo, 
 calcular o algoritmo para a resolução do cubo mágico e resolvê-lo.
 
-<img loading="lazy" src="https://github.com/erufes/cuberus-jorginho/blob/main/to_readme/imagens/cuberusAtual.jpg" width="400"  height="400"/> 
+<div align=center>
+	<img src="to_readme/imagens/cuberusAtual.jpeg" width="300">
+</div>
+
 Imagens atuais do Jorginho 1.2 do Cuberus
 
 ## ❓ O que é...
@@ -38,7 +43,9 @@ Este tijolo programável serve como o coração e o cérebro dos robôs Lego Min
 comunicação Bluetooth e Wi-Fi com um computador e tem uma interface de programação que permite a programação e o registro de dados diretamente sobre o tijolo. Nele, conectamos os motores e sensores do robô, sendo assim 
 possível realizar suas funções.
 
-<img loading="lazy" src="https://github.com/erufes/cuberus-jorginho/blob/main/to_readme/imagens/ev3.jpeg" width="300"  height="225"/> 
+<div align=center>
+	<img src="/to_readme/imagens/ev3.jpeg" width="300"  height="225"><br>
+</div>
 
 ### Ev3 dev
 É um sistema operacional baseado no Debian Linux, que é executável em diversas plataformas Lego MindStorms compatíveis, incluindo o Lego MindStorms Ev3. É uma estrutura de driver de baixo nível para controlar sensores e motores
@@ -76,3 +83,4 @@ montado de forma que as faces possuam todas as partes de mesma cor. Foi inventad
 | [<img loading="lazy" src="https://avatars.githubusercontent.com/u/56831082?v=4" width=115><br><sub>Arthur Coelho Estevão</sub>](https://github.com/arthurcoelho442) | [<img loading="lazy" src="https://avatars.githubusercontent.com/u/136736744?v=4" width=115><br><sub>Diana Mello Rosi</sub>](https://github.com/dianamross) | [<img loading="lazy" src="https://avatars.githubusercontent.com/u/136653897?v=4" width=115><br><sub>Elisa Muller Sarmento</sub>](https://github.com/BeWSM) | [<img loading="lazy" src="https://avatars.githubusercontent.com/u/91852564?v=4" width=115><br><sub>Luiz Gabriel Figueiredo</sub>](https://github.com/LGFigueiredoC) |
 | :---: | :---: | :---: | :---: |
 
+</div>
