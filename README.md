@@ -25,7 +25,7 @@ O Cuberus se trata de um robô que resolve cubo mágico. Construído com peças 
 calcular o algoritmo para a resolução do cubo mágico e resolvê-lo.
 
 <div align="center">
-    <img src="to_readme/imagens/cuberusAtual.jpeg" width="600">
+	<img src="to_readme/imagens/cuberusAtual.jpg" width="300">
 </div>
 
 Imagens atuais do Jorginho 1.2 do Cuberus
@@ -36,28 +36,34 @@ Se trata de um kit de robótica de terceira geração da linha Mindstorms da LEG
 seus blocos e peças de construção, permitindo criar diversas estruturas para robôs. Além disso, o kit conta com uma variedade de componentes (sensor de cor, motor, sensor ultrassônico...) para serem usados junto com 
 o Lego MindStorms Ev3 P-Brick.
 
-<img loading="lazy" src="https://github.com/erufes/cuberus-jorginho/blob/main/to_readme/imagens/kitLegoEdu.jpg" width="300"  height="300"/> 
+<div align="center">
+	<img src="to_readme/imagens/kitLegoEdu.jpg" width="300">
+</div>
 
 ### Lego MindStorms EV3 P-Brick
 Este tijolo programável serve como o coração e o cérebro dos robôs Lego MindStorms Education Ev3. Possui um iluminado botão que muda de cor para indicar o estado ativo do tijolo, contém com um processador ARM9, suporta USB, 
 comunicação Bluetooth e Wi-Fi com um computador e tem uma interface de programação que permite a programação e o registro de dados diretamente sobre o tijolo. Nele, conectamos os motores e sensores do robô, sendo assim 
 possível realizar suas funções.
 
-<div align=center>
-	<img src="/to_readme/imagens/ev3.jpeg" width="300"  height="225"><br>
+<div align="center">
+	<img src="to_readme/imagens/ev3.jpeg" width="200">
 </div>
 
 ### Ev3 dev
 É um sistema operacional baseado no Debian Linux, que é executável em diversas plataformas Lego MindStorms compatíveis, incluindo o Lego MindStorms Ev3. É uma estrutura de driver de baixo nível para controlar sensores e motores
 da Lego MindStorms. Suporta várias linguagens de programação, como por exemplo Pyhon. 
 
-<img loading="lazy" src="https://github.com/erufes/cuberus-jorginho/blob/main/to_readme/imagens/ev3Dev.png" width="300"  height="208,68"/> 
+<div align="center">
+	<img src="to_readme/imagens/ev3Dev.png" width="300">
+</div>
 
 ### Cubo mágico
 Também conhecido como Cubo de Rubik, é um quebra-cabeça tridimensional composto de 6 faces de cores diferentes divididas cada uma em 9 partes de tamanhos iguais. As linhas e colunas devem ser giradas para que o cubo seja 
 montado de forma que as faces possuam todas as partes de mesma cor. Foi inventado pelo professor de arquitetura húngaro Ernő Rubik em 1974. 
 
-<img loading="lazy" src="https://github.com/erufes/cuberus-jorginho/blob/main/to_readme/imagens/cuboMagicoLogo.jpg" width="200"  height="200"/> 
+<div align="center">
+	<img src="to_readme/imagens/cuboMagicoLogo.jpg" width="200">
+</div> 
 
 ## 👾 Funcionamento
 ### Ev3 dev
