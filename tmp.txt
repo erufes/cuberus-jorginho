@@ -7,3 +7,4 @@ Pillow==10.0.0
 pluggy==1.4.0
 pytest==8.1.1
 python-dotenv==0.16.0
+setuptools==69.2.0

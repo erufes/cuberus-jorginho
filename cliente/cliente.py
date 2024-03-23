@@ -1,46 +1,23 @@
-# Importe de configurações
-import configparser
+# Operações do sistema operacional 
+import os
+
+# Carrega as variaveis de ambiente
+from dotenv import load_dotenv 
+load_dotenv()
+
+# Classes
+from classes.movimentacao   import *
+from classes.camera         import camera
+from classes.Face           import adjust_IMG, cut_all
 
 # from operator import xor
 # from time import sleep
 # import requests
-# from PIL import Image 
 # import threading
-# import os
 # import shutil
-
 # from rubik.cube     import Cube
 # from rubik.solve    import Solver
-# from classes.recortaFace    import recortarall
-# from classes.cor            import getCorCubo
-
-# Camera
-from classes.camera         import camera
-
-from classes.movimentacao import *
-
-def ajustaIMG(rotate=False, delete=False):
-    for i in range(6):
-        arquivo = "face"+str(i+1)+".png"
-
-        # creating a object 
-        image = Image.open(r"fotos/"+arquivo)
-
-        MAX_SIZE = (500, 500)
-        image.thumbnail(MAX_SIZE)
-
-        image_rotated = image
-        if rotate:
-            image_rotated = image.rotate(-90, expand=True)
-
-        # Crie o diretório de saída, se não existir
-        os.makedirs("fotos/adjusted/", exist_ok=True)
-
-        # creating thumbnail
-        image_rotated.save("fotos/adjusted/"+arquivo)
-        
-        if delete:
-            os.remove("fotos/"+arquivo)
+# from classes.cor    import getCorCubo
 
 def scam_cubo(url, can): 
     
@@ -138,16 +115,12 @@ def filtra(lista):
         
 # Exemplos de uso
 if __name__ == "__main__":
-    # URL do servidor no EV3
-    config = configparser.RawConfigParser()
-    config.read("configuration/config_core.ini")
+    # URL do servidor no EV3    
+    ev3_server_url = os.environ.get("HOST_EV3", '')  + ":" + os.environ.get("PORT_EV3",'')
     
-    ev3_server_url = config['CONFIGURATION']['host_EV3']
-    
-    print(ev3_server_url)
-
-    can = camera()
-    can.video()
+    # # Tira as fotos
+    # can = camera()
+    # can.video()
     
     # # Inicia camera
     # # cube_video = threading.Thread(target=can.video)
@@ -157,12 +130,15 @@ if __name__ == "__main__":
     # # # Scaneia as faces
     # # scam_cubo(ev3_server_url, can)
     
+    # # # Libera câmera
     # # can.free()
     
-    # # Ajusta tamanho das imagens
-    # ajustaIMG(rotate=config.getboolean('CONFIGURATION','rotate'),delete=config.getboolean('CONFIGURATION','apagar_image'))
+    # # Manipulação das Imagens
+    # Ajusta tamanho das imagens
+    adjust_IMG()
     
-    # recortarall(debug=config.getboolean('CONFIGURATION','debug_recort'))
+    # Recorta face do cubo nas imagens
+    cut_all()
     
     # try:
     #     # Busca cores           
